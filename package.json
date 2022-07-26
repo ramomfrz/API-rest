@@ -1,0 +1,20 @@
+{
+  "name": "projetomodulo-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Allan, Carol, Leticia, Ramom, Raphael",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.6.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.7"
+  }
+}
