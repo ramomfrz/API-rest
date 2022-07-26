@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import express from "express";
 import * as dotenv from "dotenv"
+// IMPORTE SEU ARQUIVO .JS DO CONTROLLER // 
 
 dotenv.config()
 
@@ -14,3 +15,4 @@ app.listen(port, () => {
 
 app.use(express.json())
 
+// IMPORTE NOME DA TABELA .rotas(app) //
