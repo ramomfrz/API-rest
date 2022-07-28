@@ -1,9 +1,9 @@
 class ModelReservas {
-    constructor(CPF_Cliente, NumeroQuarto, data_entrada, data_saida) {
-        this.CPF_Cliente = CPF_Cliente
+    constructor(CpfCliente, NumeroQuarto, DataEntrada, DataSaida) {
+        this.CpfCliente = CpfCliente
         this.NumeroQuarto = NumeroQuarto
-        this.data_entrada = data_entrada
-        this.data_saida = data_saida
+        this.DataEntrada = DataEntrada
+        this.DataSaida = DataSaida
     }
 }
 
