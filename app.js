@@ -1,6 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv"
 import Limpezas from "./src/controller/LimpezaController.js"
+import Reservas from "./src/controller/Reservas.js"
 
 // IMPORTE SEU ARQUIVO .JS DO CONTROLLER // 
 
@@ -17,4 +18,5 @@ app.listen(port, () => {
 app.use(express.json())
 
 Limpezas.rotas(app)
+Reservas.rotas(app)
 // IMPORTE NOME DA TABELA .rotas(app) //
