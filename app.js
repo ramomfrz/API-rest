@@ -1,6 +1,8 @@
-import "reflect-metadata"
 import express from "express";
 import * as dotenv from "dotenv"
+import Limpezas from "./src/controller/LimpezaController.js"
+
+// IMPORTE SEU ARQUIVO .JS DO CONTROLLER // 
 
 dotenv.config()
 
@@ -14,3 +16,5 @@ app.listen(port, () => {
 
 app.use(express.json())
 
+Limpezas.rotas(app)
+// IMPORTE NOME DA TABELA .rotas(app) //
