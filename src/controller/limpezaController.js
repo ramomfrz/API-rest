@@ -1,56 +1,80 @@
-import DatabaseMetodos from "../../../ToDoAPI-T18/src/utils/DatabaseMetodos.js";
-import LimpezaModel from "../models/limpezaModel.js";
+import LimpezaModel from "../models/LimpezaModel.js";
 import ValidacoesService from "../services/ValidacoesService.js";
+import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
+import Database from "../database/Database.js";
 
-//fazer importações de database
+DatabaseLimpezasMetodos.createTableLimpezas()
 
 class Limpezas{
-    static rotas(app){
-        app.get("/limpeza", (req, res) => {
-            const resposta = DatabaseMetodos.listarTodasLimpezas()
-            res.status(200).json(resposta)
+    static rotas(app){       
+        app.get("/limpezas", async (req, res) => {
+
+            const response = await DatabaseLimpezasMetodos.listarTodasLimpezas()
+            res.status(200).json(response)
         })
 
-        app.get("/limpeza/:id", (req, res) => {
-            if(ValidacoesService.validaId(req.params.id, Database.Limpezas)){
-                const limpeza = DatabaseMetodos.listarLimpezaporId(req.params.id)
-                res.status(201).json(limpeza)
-            }else{
-                res.status(404).json({Error: "Não foi possível encontrar o registro de limpeza"})
+        app.get("/limpezas/:id", async (req, res) => {
+
+            try{
+                const limpeza = await DatabaseLimpezasMetodos.listarLimpezaPorId(req.params.id)
+                if(!limpeza){
+                    throw new Error("Não foi possível encontrar o registro de limpeza")
+                }
+                res.status(200).json(limpeza)      
+            }catch(error){
+                res.status(404).json(error.message)
             }
         })
         
-        app.post("/limpezas", (req, res) => {
+        app.post("/limpezas", async (req, res) => {
+
             const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
 
-            if(ehValido){
-                const limpeza = new LimpezaModel(...Object.values(req.body))
-                const resposta = DatabaseMetodos.inserirLimpeza(limpeza)
-                res.status(201).json(resposta)
-            }else{
-                res.status(400).json({Error: "Não é válido"})
+            try{
+                if(ehValido){
+                    const limpeza = new LimpezaModel(...Object.values(req.body))
+                    const resposta = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
+                    res.status(201).json(resposta)
+                }else{
+                    throw new Error("Revise a requisição")
+                }  
+            }catch(error){
+                res.status(400).json(error.message)
             }
+            
         })
 
-        app.put("limpezas/:id", (req, res) => {
+        app.put("/limpezas/:id", (req, res) => {
+
             const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
 
-            if(ehValido){
-                const limpeza = new LimpezaModel(...Object.values(req.body))
-                const resposta = DatabaseMetodos.atualizarPorId(req.params.id, limpeza)
-                res.status(201).json(resposta)
-            }else{
-                res.status(400).json({Error: "Não é válido"})
+            try{
+                if(ehValido){
+                    const limpeza = new LimpezaModel(...Object.values(req.body))
+                    const resposta = DatabaseLimpezasMetodos.atualizarLimpeza(req.params.id, limpeza)
+                    res.status(201).json(resposta)
+                }else{
+                    throw new Error("Não é válido")
+                }
+            }catch(error){
+                res.status(400).json(error.message)
             }
+            
         })
 
         app.delete("/limpezas/:id", (req, res) => {
-            if(ValidacoesService.validaId(req.params.id, Database.Limpezas)){
-            const limpeza = DatabaseMetodos.deletaLimpezaPorId(req.params.id)
-            res.status(200).json(limpeza)
-        }else{
-            res.status(404).json({Error: "Limpeza não encontrada"})
-        }
+
+            try{
+                if(ValidacoesService.validaId(req.params.id, Database.Limpezas)){
+                    const limpeza = DatabaseLimpezasMetodos.deletarLimpeza(id)
+                    res.status(200).json(limpeza)
+                }else{
+                    res.status(404).json({Error: "Limpeza não encontrada"})
+                }
+            }catch(error){
+                res.status(404).json(error.message)
+            }
+            
         })
     }
 }
