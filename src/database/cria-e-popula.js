@@ -7,7 +7,11 @@ const limpeza = {
     id_funcionario: "2"
 }
 
-try{
+const reservas = {
+    cpfCliente: "12345678912"
+}
+
+try {
 
     await DAO.ativaForeignKeys()
     const limpezas = await DatabaseLimpezasMetodos.createTableLimpezas()
@@ -16,6 +20,6 @@ try{
     const criouLimpeza = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
     console.log(criouLimpeza)
 
-}catch(error){
+} catch (error) {
     console.log("Error: ", error)
 }
