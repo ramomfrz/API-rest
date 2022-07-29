@@ -16,7 +16,9 @@ export default class ValidacoesService{
 
     //recebe parametro numeroQuarto que vai receber true pra validar que o numeroQuarto foi inserido
     static validaNumeroQuarto(numeroQuarto){
-        return numeroQuarto.length >= 1
+        if(numeroQuarto.length >= 1 && numeroQuarto.length <= 3){
+            return numeroQuarto
+        }
     }
 
     /**
