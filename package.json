@@ -4,17 +4,23 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "Allan, Carol, Leticia, Ramom, Raphael",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.6.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.7"
+    "path": "^0.12.7",
+    "sqlite3": "^5.0.10",
+    "url": "^0.11.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19"
   }
 }
