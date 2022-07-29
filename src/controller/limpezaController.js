@@ -1,7 +1,7 @@
 import LimpezaModel from "../models/LimpezaModel.js";
 import ValidacoesService from "../services/ValidacoesService.js";
 import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
-import Database from "../database/Database.js";
+import Database from "../database/database.js";
 
 DatabaseLimpezasMetodos.createTableLimpezas()
 
