@@ -1,11 +1,11 @@
-export default class ValidacoesService{
+export default class ValidacoesService {
 
     /**
      * 
      * @param {string} nome 
      * @returns boolean
      */
-     static validaId(id){
+    static validaId(id) {
         return id
     }
 
@@ -15,11 +15,17 @@ export default class ValidacoesService{
      */
 
     //recebe parametro numeroQuarto que vai receber true pra validar que o numeroQuarto foi inserido
-    static validaNumeroQuarto(numeroQuarto){
-        if(numeroQuarto.length >= 1 && numeroQuarto.length <= 3){
+    static validaNumeroQuarto(numeroQuarto) {
+        if (numeroQuarto.length >= 1 && numeroQuarto.length <= 3) {
             return numeroQuarto
         }
     }
+
+    static validaCPF(CPF) {
+        const regexCPF = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/
+        return regexCPF.test(CPF)
+    }
+
 
     /**
      * @param {string} controle
@@ -27,11 +33,11 @@ export default class ValidacoesService{
      */
 
     //recebe parametro controle que vai receber true pra validar se a limpeza está feita
-    static validaControle(controle){
+    static validaControle(controle) {
         const limpou = controle
-        if(limpou === 0){
+        if (limpou === 0) {
             return false
-        }else{
+        } else {
             return true
         }
     }
@@ -42,7 +48,7 @@ export default class ValidacoesService{
      */
 
     //recebe parametro id_funcionario que vai receber true pra verificar se o id_funcionario é válido
-    static validaIdFuncionario(id_funcionario){
+    static validaIdFuncionario(id_funcionario) {
         return id_funcionario.length >= 1
     }
 
@@ -54,8 +60,12 @@ export default class ValidacoesService{
      * @returns boolean
      */
 
-    static ehValido(numeroQuarto, controle, id_funcionario){
+    static ehValido(numeroQuarto, controle, id_funcionario) {
         return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario)
+    }
+
+    static reservaValidada(cpfCliente, numeroQuarto, dataEntrada, dataSaida) {
+        return this.validaNumeroQuarto(numeroQuarto) && this.validaCPF(cpfCliente)
     }
 
 }

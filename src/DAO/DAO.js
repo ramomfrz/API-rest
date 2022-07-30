@@ -66,6 +66,44 @@ class DAO {
             })
         })
     }
+
+    static listarReserva(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
+
+    static reservaAtualizada(entidade, id, query) {
+        const body = Object.values(entidade)
+        return new Promise((resolve, reject) => {
+            Database.run(query, [...body, id], (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
+
+    static deletaReserva(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ message: "Reserva deletada com sucesso!" })
+                }
+            })
+        })
+    }
+
 }
 
 export default DAO
