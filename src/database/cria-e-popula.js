@@ -1,5 +1,6 @@
 import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
 import DatabaseReservasMetodos from "../DAO/DatabaseReservasMetodos.js";
+import DatabaseHospedesMetodos from "../DAO/DatabaseHospedesMetodos.js";
 import DAO from "../DAO/DAO.js"
 
 const limpeza = {
@@ -15,6 +16,13 @@ const reserva = {
     dataSaida: "10/01/22"
 }
 
+const hospede = {
+    cpf: '12345678912',
+    nome: 'José Alves',
+    numeroQuarto: 4,
+    telefone: '1998746712'    
+}
+
 try {
 
     await DAO.ativaForeignKeys()
@@ -24,6 +32,8 @@ try {
 
     const reservas = await DatabaseReservasMetodos.createTableReservas()
     console.log(reservas, "Criada Reservas")
+
+    const hospedes = await DatabaseH
 
     const criouLimpeza = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
     console.log(criouLimpeza)
