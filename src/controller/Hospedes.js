@@ -1,22 +1,15 @@
-const listaDeHospedes = [
-  {
-    cpf: '1245876980',
-    nome: 'Jose aldo',
-    numeroQuarto: '2',
-    telefone: '140987464' 
-  },
-  {
-    cpf: '4687980354',
-    nome: 'Isaias gomes',
-    numeroQuarto: '4',
-    telefone: '1859786352' 
-  }
-]
+import DatabaseHospedesMetodos from "../DAO/DatabaseHospedesMetodos.js"
+import ValidacoesService from "../services/ValidacoesService.js"
+import Database from "../database/Database.js"
+
+DatabaseHospedesMetodos.createTableHospedes()
 
 class Hospedes {
   static rotas(app) {
-    app.get("/hospedes", (req, res) => {
-      res.send(listaDeHospedes)
+    app.get("/hospedes", async (req, res) => {
+      const response = await DatabaseHospedesMetodos.listarHospedes()
+      res.status(200).json(response)
+      
     })
 
     // app.get("/hospedes/:cpf", (req, res) => {
