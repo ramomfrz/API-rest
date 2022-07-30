@@ -116,6 +116,20 @@ class DAO {
         })
     }
 
+    static atualizarHospede(cpf, entidade, query) {
+        const body = Object.values(entidade)
+        return new Promise((resolve, reject) => {
+            Database.run(query, [...body, cpf], (error) => {
+                if (error) {
+                    console.log(`erro na promise: ${error}`)
+                    reject(error.message)
+                } else {
+                    resolve("Hospede atualizado!")
+                }
+            })
+        })
+    }
+
 }
 
 export default DAO
