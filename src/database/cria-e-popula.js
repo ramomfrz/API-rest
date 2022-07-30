@@ -11,7 +11,7 @@ const limpeza = {
 
 const reserva = {
     cpfCliente: "12345678912",
-    numeroQuarto: 4,
+    numeroQuarto: "4",
     dataEntrada: "01/01/22",
     dataSaida: "10/01/22"
 }
