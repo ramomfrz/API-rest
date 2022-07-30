@@ -68,4 +68,17 @@ export default class ValidacoesService {
         return this.validaNumeroQuarto(numeroQuarto) && this.validaCPF(cpfCliente)
     }
 
+    /**
+     * 
+     * @param {string} telefone
+     * @returns boolean
+     */
+    static validaTelefone(telefone) {
+        const telefoneValidado = parseInt(telefone)
+        return telefoneValidado == telefone
+    }
+
+
+
+
 }
