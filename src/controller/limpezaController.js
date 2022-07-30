@@ -45,14 +45,14 @@ class Limpezas{
             
         })
 
-        app.put("/limpezas/:id", (req, res) => {
-
-            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
+        app.put("/limpezas/:id", async (req, res) => {
 
             try{
-                const limpeza = new LimpezaModel(...Object.values(req.body))
-                const resposta = DatabaseLimpezasMetodos.atualizarLimpezaPorId(limpeza)             
+            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
+
                 if(ehValido){
+                    const limpeza = new LimpezaModel(...Object.values(req.body))
+                    const resposta = await DatabaseLimpezasMetodos.atualizarLimpezaPorId(req.params.id, limpeza)
                     res.status(200).json(resposta)
                 }else{
                     throw new Error("Erro ao atualizar")
