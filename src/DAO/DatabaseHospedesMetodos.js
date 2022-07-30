@@ -22,4 +22,12 @@ class DatabaseHospedesMetodos extends DAO {
     const response = await this.inserir(hospede, query)
     return response
   }
+
+  static async listarHospedes() {
+    const query = `SELECT * FROM hospedes`
+    const response = await this.listarTodas(query)
+    return response
+  }
 }
+
+export default DatabaseHospedesMetodos
