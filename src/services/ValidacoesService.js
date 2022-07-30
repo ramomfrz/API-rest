@@ -2,11 +2,20 @@ export default class ValidacoesService {
 
     /**
      * 
-     * @param {string} nome 
+     * @param {string} id 
      * @returns boolean
      */
     static validaId(id) {
         return id
+    }
+
+    /**
+     * 
+     * @param {string} nome
+     * @return boolean
+     */
+    static validaNome(nome) {
+        return nome.length >= 2
     }
 
     /**
@@ -67,5 +76,34 @@ export default class ValidacoesService {
     static reservaValidada(cpfCliente, numeroQuarto, dataEntrada, dataSaida) {
         return this.validaNumeroQuarto(numeroQuarto) && this.validaCPF(cpfCliente)
     }
+
+    /**
+     * 
+     * @param {string} telefone
+     * @returns boolean
+     */
+    static validaTelefone(telefone) {
+        const telefoneValidado = parseInt(telefone)
+        return telefoneValidado == telefone
+    }
+
+    /**
+     * 
+     * @param {number} cpf
+     * @param {string} nome
+     * @param {string} numeroQuarto
+     * @param {string} telefone
+     * @return boolean
+     */
+    static validaHospede(cpf, nome, numeroQuarto, telefone) {
+        return this.validaCPF(cpf) &&
+               this.validaNome(nome) &&
+               this.validaNumeroQuarto(numeroQuarto) &&
+               this.validaTelefone(telefone)
+    }
+
+
+
+
 
 }
