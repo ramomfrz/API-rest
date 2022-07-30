@@ -1,7 +1,7 @@
 import DatabaseHospedesMetodos from "../DAO/DatabaseHospedesMetodos.js"
 import ValidacoesService from "../services/ValidacoesService.js"
+import HospedeModel from "../models/HospedeModel.js"
 import Database from "../database/Database.js"
-
 
 DatabaseHospedesMetodos.createTableHospedes()
 
@@ -25,10 +25,25 @@ class Hospedes {
       }
     })
 
-   
-  }
+    app.post("/hospedes", async (req, res) => {
+      const validaHospede = ValidacoesService.validaHospede(...Object.values(req.body))
+      console.log(validaHospede)
 
-  
+      try {
+        if (validaHospede) {
+          const hospede = new HospedeModel(...Object.values(req.body))
+          const response = await (DatabaseHospedesMetodos.registrarHospede(hospede))
+          res.status(201).json(response)
+        } else {
+          throw new Error("Verifique se os dados da requisição estão corretos.")
+        }
+      } catch (error) {
+        res.status(400).json(error.message)
+      }
+    })   
+
+   
+  }  
 }
 
 
