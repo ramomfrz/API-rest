@@ -33,13 +33,17 @@ try {
     const reservas = await DatabaseReservasMetodos.createTableReservas()
     console.log(reservas, "Criada Reservas")
 
-    const hospedes = await DatabaseH
+    const hospedes = await DatabaseHospedesMetodos.createTableHospedes()
+    console.log(hospedes, "Tabela de hospedes criada.")
 
     const criouLimpeza = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
     console.log(criouLimpeza)
 
     const reservaRegistrada = await DatabaseReservasMetodos.inserirReserva(reserva)
     console.log(reservaRegistrada, "Reserva registrada com sucesso.")
+
+    const hospedeRegistrado = await DatabaseHospedesMetodos.registrarHospede(hospede)
+    console.log(hospedeRegistrado, "Hospede registrado com sucesso.")
 
 } catch (error) {
     console.log("Error: ", error)
