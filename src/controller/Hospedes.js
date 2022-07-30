@@ -27,6 +27,5 @@ class Hospedes {
   
 }
 
-function buscarHospede()
 
 export default Hospedes

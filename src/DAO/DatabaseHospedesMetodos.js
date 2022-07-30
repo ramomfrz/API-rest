@@ -15,5 +15,11 @@ class DatabaseHospedesMetodos extends DAO {
     return response
   }
 
-  
+  static async registrarHospede(hospede) {
+    const query = `
+    INSERT INTO hospedes (cpf, nome, numeroQuarto, telefone) VALUES (?,?,?,?)`
+
+    const response = await this.inserir(hospede, query)
+    return response
+  }
 }
