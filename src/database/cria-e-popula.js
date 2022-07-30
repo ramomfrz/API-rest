@@ -1,4 +1,5 @@
 import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
+import DatabaseReservasMetodos from "../DAO/DatabaseReservasMetodos.js";
 import DAO from "../DAO/DAO.js"
 
 const limpeza = {
