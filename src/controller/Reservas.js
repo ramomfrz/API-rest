@@ -1,7 +1,6 @@
 import ReservasModel from "../models/ReservasModel.js";
 import ValidacoesService from "../services/ValidacoesService.js";
 import DatabaseReservasMetodos from "../DAO/DatabaseReservasMetodos.js";
-import Database from "../database/database.js"
 
 DatabaseReservasMetodos.createTableReservas()
 
@@ -22,7 +21,7 @@ class Reservas {
                     throw new Error("Reserva não encontrada para esse CPF")
                 }
             } catch (error) {
-                res.status(404).json(error.message)
+                res.status(500).json(error.message)
             }
         })
 
@@ -38,30 +37,23 @@ class Reservas {
                     throw new Error("Informações inválidas, confira os dados e tente novamente.")
                 }
             } catch (error) {
-                res.status(400).json(error.message)
+                res.status(500).json(error.message)
             }
         })
 
-        app.put("/reservas/:id", (req, res) => {
+        app.put("/reservas/:id", async (req, res) => {
             try {
                 const reservaValidada = ValidacoesService.reservaValidada(...Object.values(req.body))
-
                 if (reservaValidada) {
                     const reserva = new ReservasModel(...Object.values(req.body))
-                    const response = DatabaseReservasMetodos.atualizarReserva(req.params.id, reserva)
-
-                    res.status(201).json(response)
+                    const response = await DatabaseReservasMetodos.atualizarReserva(req.params.id, reserva)
+                    res.status(200).json(response)
                 } else {
-                    throw new Error("Número de reserva inválido.")
+                    res.status(404).json({ mensagem: "Reserva não encontrada" })
                 }
             } catch (error) {
-                res.status(400).json({ Erro: "Erro" })
+                res.status(500).json({ erro: "Reserva não encontrada" })
             }
-        })
-
-        app.patch("/reservas/:id", (req, res) => {
-            const response = DatabaseReservasMetodos.atualizaReserva(req.params.id, req.body)
-            res.status(200).json(response)
         })
 
         app.delete("/reservas/:id", async (req, res) => {
@@ -73,7 +65,7 @@ class Reservas {
                     throw new Error("Reserva não encontrada para esse CPF")
                 }
             } catch (error) {
-                res.status(404).json({ Error: error.message })
+                res.status(500).json({ Error: error.message })
             }
         })
     }
