@@ -88,7 +88,18 @@ class DAO {
                 }else{
                     // resolve({erro: false, message: `Registro de número ${id} atualizado`})
                     resolve(result)
+                }
+            })
+        })
+    }        
 
+    static listarReserva(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
                 }
             })
         })
@@ -106,6 +117,45 @@ class DAO {
             })
         })        
     }
+
+    static listarHospede(cpf, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, cpf, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
+
+    static reservaAtualizada(entidade, id, query) {
+        const body = Object.values(entidade)
+
+        return new Promise((resolve, reject) => {
+            Database.run(query, [...body, id], (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ error: false, message: "Dados da reserva atualizados." })
+                }
+            })
+        })
+    }
+
+    static deletaReserva(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ message: "Reserva deletada com sucesso!" })
+                }
+            })
+        })
+    }
+
 }
 
 export default DAO
