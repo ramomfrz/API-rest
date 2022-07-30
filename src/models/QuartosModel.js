@@ -1,8 +1,8 @@
 class QuartosModel{
-    constructor(numero, nome, controleLimpeza, telefone){
-        this.numero = numero
-        this.nome = nome
-        this.controleLimpeza = controleLimpeza
+    constructor(numeroQuarto, nomeHospedes, controle, telefone){
+        this.numeroQuarto = numeroQuarto
+        this.nomeHospedes = nomeHospedes
+        this.controle = controle
         this.telefone = telefone
     }
 };

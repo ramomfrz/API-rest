@@ -1,115 +1,53 @@
-import Database from "../database/Database.js";
+import DAOquartos from "./DAOquartos.js";
 
-class DatabaseMetodos{
-    static activePragma(){
-        const pragma = "PRAGMA foreign_keys = ON"
-
-        Database.run(pragma, (e)=>{
-            if(e){
-                console.log(e)
-            } else {
-                console.log("Chaves estrangeiras estão ativas")
-            }
-        })
-    }
-
-    static createTable(){
-        
-        this.activePragma();
+class DatabaseMetodos extends DAOquartos {
+    
+    static async create(){
 
         const query = `
         CREATE TABLE IF NOT EXISTS quartos(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            numero VARCHAR,
-            nome_hospedes VARCHAR,
-            controle_limpeza VARCHAR,
-            telefone VARCHAR
+            numeroQuarto VARCHAR NOT NULL,
+            nomeHospedes VARCHAR NOT NULL,
+            controle TINYINT NOT NULL,
+            telefone VARCHAR NOT NULL
         )
         `
-        return new Promise((resolve, reject)=>{
-            Database.run(query, (e)=>{
-                if(e){
-                    reject(e.message)
-                } else {
-                    resolve("Tabela quartos criada com sucesso!")
-                }
-            })
-        })
-    };
+        const response = await this.createTable(query)
+        return response
+            
+    }
 
-    static listarQuartos(){
+    static async listar(){
         const query = `SELECT * FROM quartos`;
+        const response = await this.listarQuartos(query)
+        return response
+    }
 
-        return new Promise((resolve, reject) => {
-            Database.all(query, (e, result) => {
-                if(e){
-                    reject(e.message)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
-    };
-    
-    static listarQuarto(id){
-        const query = `SELECT * FROM quartos WHERE id=?`;
+    static async listarUm(id){
+        const query = `SELECT * FROM quartos WHERE id = ?`;
+        const response = await this.listarQuarto(id, query)
+        return response
+    }
 
-        return new Promise((resolve, reject) => {
-            Database.all(query, id, (e, result) => {
-                if(e){
-                    reject(e.message)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
-    };
+    static async inserir(entidade){
+        const query = `INSERT INTO quartos (numeroQuarto, nomeHospedes, controle, telefone) VALUES (?,?,?,?)`;
+        const response = await this.inserirQuarto(entidade, query)
+        return response
+    }
 
-    static inserirQuarto(quarto){
-        const query = `INSERT INTO quartos (numero, nome_hospedes, controle_limpeza, telefone) VALUES (?,?,?,?)`
-        
-        const body = Object.values(quarto);
 
-        return new Promise((resolve, reject) => {
-            Database.run(query, [...body], (error) => {
-                if(error){
-                    reject(error.message)
-                } else {
-                    resolve({message: "Quarto adcionado com sucesso!"})
-                }
-            })
-        })
-    };
+    static async atualizar(id, entidade){
+        const query = `UPDATE quartos SET numeroQuarto=?, nomeHospedes=?, controle=?, telefone=? WHERE id=?`;
+        const response = await this.atualizarQuarto(id, entidade, query)
+        return response
+    }
 
-    static atualizarQuarto(id, quarto){
-        const query = `UPDATE quartos SET numero=?, nome_hospedes=?, controle_limpeza=?, telefone=? WHERE id=?`;
-
-        const body = Object.values(quarto);
-
-        return new Promise((resolve, reject)=>{
-            Database.run(query, [...body, id], (error) => {
-                if(error){
-                    reject(error.message)
-                } else {
-                    resolve({message: "Quarto atualizado com sucesso!"})
-                }
-            })
-        })
-    };
-
-    static deletarQuarto(id){
-        const query = `DELETE FROM quartos WHERE id=?`;
-
-        return new Promise((resolve, reject) => {
-            Database.run(query, id, (error) => {
-                if(error){
-                    reject(error.message)
-                } else {
-                    resolve({message: "Quarto deletado com sucesso!"})
-                }
-            })
-        })
-    };
+    static async deletar(id){
+        const query = `DELETE FROM quartos WHERE id = ?`;
+        const response = await this.deletarQuarto(id, query)
+        return response
+    }
 }
 
 export default DatabaseMetodos;

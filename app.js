@@ -15,6 +15,6 @@ app.listen(port, () => {
 })
 
 app.use(express.json());
-DatabaseMetodos.createTable();
+DatabaseMetodos.create();
 Quartos.rotas(app);
-app.use(cors())
+app.use(cors());

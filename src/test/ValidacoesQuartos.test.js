@@ -1,7 +1,7 @@
 import ValidacoesQuartos from "../services/ValidacoesQuartos.js";
 
 test("Validar se o numero do quarto é igual a 3", () => {
-    expect(ValidacoesQuartos.validaNome("123")).toBe(true)
+    expect(ValidacoesQuartos.validaNumero("123")).toBe(true)
 });
 
 test("Validar se o nome tem mais de 3 letras", () => {
@@ -13,6 +13,10 @@ test("Validar se o nome tem mais de 3 letras", () => {
 });
 
 test("Validar se os paramentros para limpeza estão corretos", () => {
-    expect(ValidacoesQuartos.validaNome("limpo")).toBe(true)
+    expect(ValidacoesQuartos.validaControle("1")).toBe(true)
+});
+
+test("Validar se os paramentros para limpeza estão corretos", () => {
+    expect(ValidacoesQuartos.validaTelefone("123456789")).toBe(true)
 });
 
