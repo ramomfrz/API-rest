@@ -2,10 +2,10 @@ export default class ValidacoesService{
 
     /**
      * 
-     * @param {string} nome 
+     * @param {integer} id 
      * @returns boolean
      */
-     static validaId(id){
+    static validaId(id){
         return id
     }
 
@@ -14,26 +14,19 @@ export default class ValidacoesService{
      * @returns boolean
      */
 
-    //recebe parametro numeroQuarto que vai receber true pra validar que o numeroQuarto foi inserido
     static validaNumeroQuarto(numeroQuarto){
-        if(numeroQuarto.length >= 1 && numeroQuarto.length <= 3){
-            return numeroQuarto
-        }
+        const numQuarto = numeroQuarto
+        return numQuarto.length >= 1 && numQuarto.length <= 3
     }
 
     /**
-     * @param {string} controle
+     * @param {tinyint} controle
      * @returns boolean
      */
 
-    //recebe parametro controle que vai receber true pra validar se a limpeza está feita
     static validaControle(controle){
         const limpou = controle
-        if(limpou === 0){
-            return false
-        }else{
-            return true
-        }
+        return limpou === 1 ? true : false
     }
 
     /**
@@ -41,15 +34,14 @@ export default class ValidacoesService{
      * @returns boolean
      */
 
-    //recebe parametro id_funcionario que vai receber true pra verificar se o id_funcionario é válido
     static validaIdFuncionario(id_funcionario){
-        return id_funcionario.length >= 1
+        return id_funcionario.length >= 0 && id_funcionario.length <= 3
     }
 
     /**
      * 
      * @param {string} numeroQuarto 
-     * @param {string} controle 
+     * @param {tinyint} controle 
      * @param {string} id_funcionario 
      * @returns boolean
      */
