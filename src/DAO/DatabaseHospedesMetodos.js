@@ -25,9 +25,19 @@ class DatabaseHospedesMetodos extends DAO {
 
   static async listarHospedes() {
     const query = `SELECT * FROM hospedes`
+
     const response = await this.listarTodas(query)
     return response
   }
+
+  static async listarHospedePorCPF(cpf) {
+    const query = `SELECT * FROM hospedes WHERE cpf = ?`
+    
+    const response = await this.listarHospede(cpf, query)
+    return response
+  }
+
+
 }
 
 export default DatabaseHospedesMetodos
