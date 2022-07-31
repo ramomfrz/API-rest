@@ -69,7 +69,7 @@ static listFuncionario(id, query) {
     }
 
 
-static updateFuncionario(entidade, id, query) {
+static update(entidade, id, query) {
         const body = Object.values(entidade)
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, id], (error, resultado) => {
@@ -83,7 +83,7 @@ static updateFuncionario(entidade, id, query) {
     }
 
 
-static deleteFuncionario(id, query) {
+static delete(id, query) {
         return new Promise((resolve, reject) => {
             Database.run(query, id, (error, resultado) => {
                 if (error) {
