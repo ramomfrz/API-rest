@@ -1,7 +1,5 @@
 import FuncionarioModel from "../models/funcionarioModel.js"
-//import ValidacoesFuncionarios from "../services/ValidacoesFuncionarios.js"
 import ValidacoesService from "../services/ValidacoesService.js"
-
 import DatabaseFuncionariosMetodos from "../DAO/DatabaseFuncionariosMetodos.js"
 import Database from "../database/database.js"
 
@@ -9,7 +7,7 @@ DatabaseFuncionariosMetodos.createTableFuncionarios()
 
 class Funcionarios{
     static rotas(app){
-        app.get('/funicionarios', async (req, res) => {
+        app.get('/funcionario', async (req, res) => {
             const response = await
             DatabaseFuncionariosMetodos.listAllFuncionarios()
             res.status(200).json(response)
@@ -35,11 +33,10 @@ class Funcionarios{
             try{
                 if(validarFuncionario){
                     const funcionario = new FuncionarioModel(...Object.values(req.body))
-                    const responde = await
-                    DatabaseFuncionariosMetodos.insertFuncionarios(funcionario)
+                    const responde = await DatabaseFuncionariosMetodos.insertFuncionarios(funcionario)
                     res.status(201).json(responde)
                 }else{
-                    const funcionario = new FuncionarioModel(...Object.values(req.body))
+                    //const funcionario = new FuncionarioModel(...Object.values(req.body))
                     console.log(funcionario)
                     throw new Error("Revise a requisição")
                 }
