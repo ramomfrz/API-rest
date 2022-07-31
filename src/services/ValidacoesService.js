@@ -129,8 +129,10 @@ static validaDataAdmissao(data_admissao){
         return regexData.test(data_admissao)
 }
 
-    static validarFuncionario(nome){
-        return this.ValidarNome(nome) && this.validaId(id) && this.validaDataAdmissao(data_admissao)
+     static validarFuncionario(nome){
+         return this.ValidarNome(nome)
     }
 
-}
+ }
+
+ //&& this.validaDataAdmissao(data_admissao)

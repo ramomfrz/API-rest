@@ -18,7 +18,7 @@ class DatabaseFuncionariosMetodos extends funcionariosDAO {
     }
 
     static async insertFuncionarios(funcionario){
-        const query = `INSERT INTO funcionarios(id, nome, data_admissao) VALUES (?,?,?)`
+        const query = `INSERT INTO funcionarios (id, nome, data_admissao) VALUES (?,?,?)`
         const response = await this.insert(funcionario, query)
         return response
     }
