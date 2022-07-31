@@ -1,6 +1,6 @@
 import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
 import DatabaseReservasMetodos from "../DAO/DatabaseReservasMetodos.js";
-import DatabaseHospedesMetodos from "../DAO/DatabaseHospedesMetodos.js";
+import DatabaseFuncionariosMetodos from "../DAO/DatabaseFuncionariosMetodos.js";
 import DAO from "../DAO/DAO.js"
 
 const limpeza = {
@@ -14,6 +14,11 @@ const reserva = {
     numeroQuarto: "4",
     dataEntrada: "01/01/22",
     dataSaida: "10/01/22"
+}
+
+const funcionarios = {
+    nome: "Jane Doe",
+    data_admissao: "05/05/2022"
 }
 
 const hospede = {
@@ -42,8 +47,12 @@ try {
     const reservaRegistrada = await DatabaseReservasMetodos.inserirReserva(reserva)
     console.log(reservaRegistrada, "Reserva registrada com sucesso.")
 
-    const hospedeRegistrado = await DatabaseHospedesMetodos.registrarHospede(hospede)
-    console.log(hospedeRegistrado, "Hospede registrado com sucesso.")
+   const funcionario = await DatabaseFuncionariosMetodos.createTableFuncionarios()
+   console.log(funcionario, "Registro criado")
+   
+    const funcionarioAdicionado = await DatabaseFuncionariosMetodos.inserir(funcionarios)
+    console.log(funcionarioAdicionado, "Funcionário adicionado com sucesso.")
+    
 
 } catch (error) {
     console.log("Error: ", error)
