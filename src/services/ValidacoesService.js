@@ -89,9 +89,9 @@ export default class ValidacoesService {
 
     /**
      * 
-     * @param {number} cpf
+     * @param {string} cpf
      * @param {string} nome
-     * @param {string} numeroQuarto
+     * @param {number} numeroQuarto
      * @param {string} telefone
      * @return boolean
      */
