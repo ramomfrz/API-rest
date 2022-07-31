@@ -25,12 +25,11 @@ export default class ValidacoesService {
 
     //recebe parametro numeroQuarto que vai receber true pra validar que o numeroQuarto foi inserido
     static validaNumeroQuarto(numeroQuarto) {
-        if (numeroQuarto.length >= 1 && numeroQuarto.length <= 4) {
-            const validaInt = parseInt(numeroQuarto)
-            if (Number.isInteger(validaInt)) {
-                return numeroQuarto
+        if (numeroQuarto >= 1 && numeroQuarto <= 9999) {
+            if (typeof (numeroQuarto) != "number") {
+                return false
             } else {
-                return "Numero do quarto inválido"
+                return true
             }
         }
     }
@@ -111,9 +110,9 @@ export default class ValidacoesService {
      */
     static validaHospede(cpf, nome, numeroQuarto, telefone) {
         return this.validaCPF(cpf) &&
-               this.validaNome(nome) &&
-               this.validaNumeroQuarto(numeroQuarto) &&
-               this.validaTelefone(telefone)
+            this.validaNome(nome) &&
+            this.validaNumeroQuarto(numeroQuarto) &&
+            this.validaTelefone(telefone)
     }
 
 
