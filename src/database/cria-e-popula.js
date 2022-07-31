@@ -5,7 +5,7 @@ import DAO from "../DAO/DAO.js"
 
 const limpeza = {
     numeroQuarto: "4",
-    controle: 0,
+    controle: 1,
     id_funcionario: "2"
 }
 

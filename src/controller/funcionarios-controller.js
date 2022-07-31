@@ -33,11 +33,11 @@ class Funcionarios{
             try{
                 if(validarFuncionario){
                     const funcionario = new FuncionarioModel(...Object.values(req.body))
-                    const responde = await DatabaseFuncionariosMetodos.insertFuncionarios(funcionario)
-                    res.status(201).json(responde)
+                    const response = await DatabaseFuncionariosMetodos.insertFuncionarios(funcionario)
+                    res.status(201).json(response)
                 }else{
                     //const funcionario = new FuncionarioModel(...Object.values(req.body))
-                    console.log(funcionario)
+                  //  console.log(funcionario)
                     throw new Error("Revise a requisição")
                 }
             }catch(error){

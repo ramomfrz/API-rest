@@ -36,7 +36,7 @@ class funcionariosDAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ error: false, message: "Cadastrou" })
+                    resolve({error: false, message: "Cadastrou"})
                 }
             })
         })
@@ -58,7 +58,7 @@ static listAll(query) {
 
 static listFuncionario(id, query) {
         return new Promise((resolve, reject) => {
-            Database.all(query, id, (error, resultado) => {
+            Database.get(query, id, (error, resultado) => {
                 if (error) {
                     reject(error.message)
                 } else {
@@ -83,13 +83,13 @@ static update(entidade, id, query) {
     }
 
 
-static delete(id, query) {
+static delete(query, id) {
         return new Promise((resolve, reject) => {
-            Database.run(query, id, (error, resultado) => {
+            Database.run(query, id, (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ message: "Registro removido do sistema!" })
+                    resolve({ erro: false, message: `Registro do Id ${id} removido com sucesso`})
                 }
             })
         })
