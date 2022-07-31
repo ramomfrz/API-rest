@@ -1,7 +1,6 @@
 import LimpezaModel from "../models/LimpezaModel.js";
 import ValidacoesService from "../services/ValidacoesService.js";
 import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
-import Database from "../database/database.js";
 
 DatabaseLimpezasMetodos.createTableLimpezas()
 
@@ -17,10 +16,12 @@ class Limpezas{
 
             try{
                 const limpeza = await DatabaseLimpezasMetodos.listarLimpezaPorId(req.params.id)
-                if(!limpeza){
+                if(limpeza){
+                    res.status(200).json(limpeza)      
+                }else{
                     throw new Error("Não foi possível encontrar o registro de limpeza")
+
                 }
-                res.status(200).json(limpeza)      
             }catch(error){
                 res.status(404).json(error.message)
             }
@@ -36,7 +37,7 @@ class Limpezas{
                     const resposta = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
                     res.status(201).json(resposta)
                 }else{
-                    throw new Error("Revise a requisição")
+                    throw new Error("Revise o corpo da requisição")
                 }  
             }catch(error){
                 res.status(400).json(error.message)
@@ -44,17 +45,17 @@ class Limpezas{
             
         })
 
-        app.put("/limpezas/:id", (req, res) => {
-
-            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
+        app.put("/limpezas/:id", async (req, res) => {
 
             try{
+            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
+
                 if(ehValido){
                     const limpeza = new LimpezaModel(...Object.values(req.body))
-                    const resposta = DatabaseLimpezasMetodos.atualizarLimpeza(req.params.id, limpeza)
-                    res.status(201).json(resposta)
+                    const resposta = await DatabaseLimpezasMetodos.atualizarLimpezaPorId(req.params.id, limpeza)
+                    res.status(200).json(resposta)
                 }else{
-                    throw new Error("Não é válido")
+                    throw new Error("Erro ao atualizar")
                 }
             }catch(error){
                 res.status(400).json(error.message)
@@ -62,20 +63,21 @@ class Limpezas{
             
         })
 
-        app.delete("/limpezas/:id", (req, res) => {
-
+        app.delete("/limpezas/:id", async (req, res) => {
             try{
-                if(ValidacoesService.validaId(req.params.id, Database.Limpezas)){
-                    const limpeza = DatabaseLimpezasMetodos.deletarLimpeza(id)
+                const limpeza = await DatabaseLimpezasMetodos.deletarLimpezaPorId(req.params.id)
+                if(limpeza){
                     res.status(200).json(limpeza)
                 }else{
-                    res.status(404).json({Error: "Limpeza não encontrada"})
+                    throw new Error("Limpeza não encontrada")
                 }
+
             }catch(error){
                 res.status(404).json(error.message)
             }
             
         })
+
     }
 }
 
