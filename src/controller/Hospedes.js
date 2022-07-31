@@ -9,8 +9,7 @@ class Hospedes {
   static rotas(app) {
     app.get("/hospedes", async (req, res) => {
       const response = await DatabaseHospedesMetodos.listarHospedes();
-      res.status(200).json(response);
-      
+      res.status(200).json(response);      
     })
 
     app.get("/hospedes/:cpf", async (req, res) => {
@@ -36,7 +35,7 @@ class Hospedes {
           const response = await (DatabaseHospedesMetodos.registrarHospede(hospede));
           res.status(201).json(response);
         } else {
-          throw new Error("Verifique se os dados da requisição estão corretos.");
+          throw new Error("Cadastro não realizado. Verifique se os dados da requisição estão corretos." );
         }
       } catch (error) {
         res.status(400).json(error.message);
@@ -50,20 +49,16 @@ class Hospedes {
       if (validaHospede) {
         const hospede = new HospedeModel(...Object.values(req.body));
         
-        const response = DatabaseHospedesMetodos.atualizarHospedesPorCPF(req.params.cpf, hospede)
-        
+        const response = DatabaseHospedesMetodos.atualizarHospedesPorCPF(req.params.cpf, hospede)        
         res.status(201).json(response)
-      } else {
-        // const hospede = new HospedeModel(...Object.values(req.body));
-        // console.log(hospede)
-        
-        res.status(400).json({Erro: "Verifique os dados da requisição. Lembre-se, o cpf não pode ser alterado(por enquanto)."})
+      } else {               
+        res.status(400).json("Atualização de informações não realizada. Verifique os dados da requisição.")
       }
+    })   
+
+    
 
 
-    })
-
-   
   }  
 }
 
