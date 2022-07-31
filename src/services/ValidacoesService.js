@@ -66,7 +66,7 @@ export default class ValidacoesService {
      */
 
     static validaIdFuncionario(id_funcionario){
-        return id_funcionario.length >= 0 && id_funcionario.length <= 3
+        return id_funcionario.length > 0 && id_funcionario.length <= 3
     }
 
     /**
