@@ -76,22 +76,22 @@ class DAO {
         })
     }
 
-    static atualizar(entidade, id, query){
+    static atualizar(entidade, id, query) {
         const body = Object.values(entidade)
         // const objeto = new LimpezaModel(...Object.values(req.body))
 
-        return new Promise ((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
             Database.run(query, [...body, id], (error) => {
-                if(error){
+                if (error) {
                     reject(error.message)
-                }else{
+                } else {
                     // resolve({erro: false, message: `Registro de número ${id} atualizado`})
-                    resolve({error: false, message: "Dados de limpeza atualizados." })
+                    resolve({ error: false, message: "Dados de limpeza atualizados." })
                 }
             })
         })
-    }        
+    }
 
     static listarReserva(id, query) {
         return new Promise((resolve, reject) => {
@@ -105,17 +105,17 @@ class DAO {
         })
     }
 
-    static deletar(query, id){
+    static deletar(query, id) {
 
         return new Promise((resolve, reject) => {
             Database.run(query, id, (error) => {
-                if(error){
+                if (error) {
                     reject(error.message)
-                }else{
-                    resolve({error: false, message: `Registro ${id} deletado!`})
+                } else {
+                    resolve({ error: false, message: `Registro ${id} deletado!` })
                 }
             })
-        })        
+        })
     }
 
     static listarHospede(cpf, query) {
@@ -134,7 +134,7 @@ class DAO {
         const body = Object.values(entidade)
 
         return new Promise((resolve, reject) => {
-            Database.run(query, [...body, id], (error, resultado) => {
+            Database.run(query, [...body, id], (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
@@ -146,7 +146,7 @@ class DAO {
 
     static deletaReserva(id, query) {
         return new Promise((resolve, reject) => {
-            Database.run(query, id, (error, resultado) => {
+            Database.run(query, id, (error) => {
                 if (error) {
                     reject(error.message)
                 } else {

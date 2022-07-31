@@ -2,10 +2,9 @@ export default class ValidacoesService {
 
     /**
      * 
-     * @param {integer} id 
+     * @param {string} id 
      * @returns boolean
      */
-    
     static validaId(id) {
         return id
     }
@@ -24,13 +23,13 @@ export default class ValidacoesService {
      * @returns boolean
      */
 
+    //recebe parametro numeroQuarto que vai receber true pra validar que o numeroQuarto foi inserido
     static validaNumeroQuarto(numeroQuarto) {
-        if (numeroQuarto.length >= 1 && numeroQuarto.length <= 4) {
-            const validaInt = parseInt(numeroQuarto)
-            if (Number.isInteger(validaInt)) {
-                return numeroQuarto
+        if (numeroQuarto >= 1 && numeroQuarto <= 9999) {
+            if (typeof (numeroQuarto) != "number") {
+                return false
             } else {
-                return "Numero do quarto inválido"
+                return true
             }
         }
     }
@@ -51,13 +50,18 @@ export default class ValidacoesService {
     }
 
     /**
-     * @param {tinyint} controle
+     * @param {string} controle
      * @returns boolean
      */
 
-    static validaControle(controle){
+    //recebe parametro controle que vai receber true pra validar se a limpeza está feita
+    static validaControle(controle) {
         const limpou = controle
-        return limpou === 1 ? true : false
+        if (limpou === 0) {
+            return false
+        } else {
+            return true
+        }
     }
 
     /**
@@ -65,14 +69,15 @@ export default class ValidacoesService {
      * @returns boolean
      */
 
-    static validaIdFuncionario(id_funcionario){
-        return id_funcionario.length > 0 && id_funcionario.length <= 3
+    //recebe parametro id_funcionario que vai receber true pra verificar se o id_funcionario é válido
+    static validaIdFuncionario(id_funcionario) {
+        return id_funcionario.length >= 1
     }
 
     /**
      * 
      * @param {string} numeroQuarto 
-     * @param {tinyint} controle 
+     * @param {string} controle 
      * @param {string} id_funcionario 
      * @returns boolean
      */
