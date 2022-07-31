@@ -30,7 +30,7 @@ class DatabaseReservasMetodos extends DAO {
         return response
     }
     static async atualizarReserva(id, valores) {
-        const query = `UPDATE reservas SET ? WHERE id = ?`
+        const query = `UPDATE reservas SET CPF = ?, numeroQuarto = ?, dataEntrada = ?, dataSaida = ? WHERE id = ?`
         const response = await this.reservaAtualizada(valores, id, query)
         return response
     }

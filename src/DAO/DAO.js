@@ -7,6 +7,7 @@ class DAO {
         const query = 'PRAGMA foreign_keys = ON'
 
         Database.run(query, error => {
+
             if (error) {
                 console.log(error)
             } else {
@@ -18,6 +19,7 @@ class DAO {
     static createTable(query) {
 
         return new Promise((resolve, reject) => {
+
             Database.run(query, (error) => {
                 if (error) {
                     reject(error.message)
@@ -29,12 +31,15 @@ class DAO {
     }
 
     static inserir(entidade, query) {
+
         const body = Object.values(entidade)
 
         return new Promise((resolve, reject) => {
+
             Database.run(query, [...body], (error) => {
                 if (error) {
                     reject(error.message)
+                    throw new Error("Cadastro mal sucedido")
                 } else {
                     resolve({ error: false, message: "Cadastrou" })
                 }
@@ -44,24 +49,44 @@ class DAO {
 
 
     static listarTodas(query) {
+
         return new Promise((resolve, reject) => {
-            Database.all(query, (error, resultado) => {
+
+            Database.all(query, (error, res) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve(resultado)
+                    resolve(res)
                 }
             })
         })
     }
 
     static listarLimpeza(id, query) {
+
         return new Promise((resolve, reject) => {
-            Database.all(query, id, (error, resultado) => {
+
+            Database.all(query, id, (error, res) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve(resultado)
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+    static atualizarLimpeza(entidade, id, query){
+        const body = Object.values(entidade)
+
+        return new Promise((resolve, reject) => {
+
+            Database.run(query, [...body, id], (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    // resolve({erro: false, message: `Registro de número ${id} atualizado`})
+                    resolve({ error: false, message: "Dados de limpeza atualizados." })
                 }
             })
         })
@@ -74,6 +99,19 @@ class DAO {
                     reject(error.message)
                 } else {
                     resolve(resultado)
+                }
+            })
+        })
+    }
+
+    static deletar(query, id) {
+
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ error: false, message: `Registro ${id} deletado!` })
                 }
             })
         })
@@ -93,12 +131,13 @@ class DAO {
 
     static reservaAtualizada(entidade, id, query) {
         const body = Object.values(entidade)
+
         return new Promise((resolve, reject) => {
-            Database.run(query, [...body, id], (error, resultado) => {
+            Database.run(query, [...body, id], (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve(resultado)
+                    resolve({ error: false, message: "Dados da reserva atualizados." })
                 }
             })
         })
@@ -106,7 +145,7 @@ class DAO {
 
     static deletaReserva(id, query) {
         return new Promise((resolve, reject) => {
-            Database.run(query, id, (error, resultado) => {
+            Database.run(query, id, (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
@@ -129,9 +168,63 @@ class DAO {
             })
         })
     }
+        
+    static listFuncionario(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
 
     
 
+    static listarPorId(id, query) {
+
+        return new Promise((resolve, reject) => {
+
+            Database.all(query, id, (error, res) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+
+static update( entidade, id, query) {
+    const body = Object.values(entidade)
+
+        return new Promise((resolve, reject) => {
+            Database.run(query, [...body, id], (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ error: false, message: "Dados atualizados." })
+                }
+            })
+        })
+    }
+
+
+static delete(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ erro: false, message: `Registro do Id ${id} removido com sucesso`})
+                }
+            })
+        })
+    }
 }
+
 
 export default DAO
