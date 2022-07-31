@@ -10,7 +10,7 @@ const limpeza = {
 }
 
 const reserva = {
-    cpfCliente: "12345678912",
+    CPF: "12345678912",
     numeroQuarto: "4",
     dataEntrada: "01/01/22",
     dataSaida: "10/01/22"
@@ -20,7 +20,7 @@ const hospede = {
     cpf: '12345678912',
     nome: 'José Alves',
     numeroQuarto: 4,
-    telefone: '1998746712'    
+    telefone: '1998746712'
 }
 
 try {

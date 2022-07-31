@@ -2,10 +2,9 @@ export default class ValidacoesService {
 
     /**
      * 
-     * @param {integer} id 
+     * @param {string} id 
      * @returns boolean
      */
-    
     static validaId(id) {
         return id
     }
@@ -25,12 +24,11 @@ export default class ValidacoesService {
      */
 
     static validaNumeroQuarto(numeroQuarto) {
-        if (numeroQuarto.length >= 1 && numeroQuarto.length <= 4) {
-            const validaInt = parseInt(numeroQuarto)
-            if (Number.isInteger(validaInt)) {
-                return numeroQuarto
+        if (numeroQuarto >= 1 && numeroQuarto <= 9999) {
+            if (typeof (numeroQuarto) != "number") {
+                return false
             } else {
-                return "Numero do quarto inválido"
+                return true
             }
         }
     }
@@ -51,11 +49,12 @@ export default class ValidacoesService {
     }
 
     /**
-     * @param {tinyint} controle
+     * @param {string} controle
      * @returns boolean
      */
 
-    static validaControle(controle){
+    //recebe parametro controle que vai receber true pra validar se a limpeza está feita
+    static validaControle(controle) {
         const limpou = controle
         return limpou === 1 || limpou === 0 ? true : false
     }
@@ -73,7 +72,7 @@ export default class ValidacoesService {
     /**
      * 
      * @param {string} numeroQuarto 
-     * @param {tinyint} controle 
+     * @param {string} controle 
      * @param {string} id_funcionario 
      * @returns boolean
      */
