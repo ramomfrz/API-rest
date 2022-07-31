@@ -44,7 +44,7 @@ try {
    const funcionario = await DatabaseFuncionariosMetodos.createTableFuncionarios()
    console.log(funcionario, "Registro criado")
    
-    const funcionarioAdicionado = await DatabaseFuncionariosMetodos.insert(funcionarios)
+    const funcionarioAdicionado = await DatabaseFuncionariosMetodos.inserir(funcionarios)
     console.log(funcionarioAdicionado, "Funcionário adicionado com sucesso.")
     
 

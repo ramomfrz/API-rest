@@ -1,14 +1,5 @@
 export default class ValidacoesService {
 
-    /**
-     * 
-     * @param {integer} id 
-     * @returns boolean
-     */
-    
-    static validaId(id) {
-        return id
-    }
 
     /**
      * 
@@ -123,10 +114,10 @@ static validaDataAdmissao(data_admissao){
         return regexData.test(data_admissao)
 }
 
-     static validarFuncionario(nome){
-         return this.ValidarNome(nome)
+     static validarFuncionario(nome, data_admissao){
+         return this.ValidarNome(nome) && this.validaDataAdmissao(data_admissao)
     }
 
- }
+}
 
  //&& this.validaDataAdmissao(data_admissao)

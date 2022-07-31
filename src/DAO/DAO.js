@@ -38,7 +38,7 @@ class DAO {
 
             Database.run(query, [...body], (error) => {
                 if (error) {
-                    // reject(error.message)
+                    reject(error.message)
                     throw new Error("Cadastro mal sucedido")
                 } else {
                     resolve({ error: false, message: "Cadastrou" })
@@ -78,7 +78,6 @@ class DAO {
 
     static atualizar(entidade, id, query){
         const body = Object.values(entidade)
-        // const objeto = new LimpezaModel(...Object.values(req.body))
 
         return new Promise ((resolve, reject) => {
 
@@ -86,7 +85,6 @@ class DAO {
                 if(error){
                     reject(error.message)
                 }else{
-                    // resolve({erro: false, message: `Registro de número ${id} atualizado`})
                     resolve({error: false, message: "Dados de limpeza atualizados." })
                 }
             })
@@ -156,6 +154,60 @@ class DAO {
         })
     }
 
+    static listFuncionario(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
+
+    static listarPorId(id, query) {
+
+        return new Promise((resolve, reject) => {
+
+            Database.all(query, id, (error, res) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+
+static update( entidade, id, query) {
+    const body = Object.values(entidade)
+
+        return new Promise((resolve, reject) => {
+            Database.run(query, [...body, id], (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ error: false, message: "Dados atualizados." })
+                }
+            })
+        })
+    }
+
+
+static delete(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ erro: false, message: `Registro do Id ${id} removido com sucesso`})
+                }
+            })
+        })
+    }
 }
+
 
 export default DAO
