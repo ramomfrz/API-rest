@@ -38,7 +38,7 @@ class DAO {
 
             Database.run(query, [...body], (error) => {
                 if (error) {
-                    // reject(error.message)
+                    reject(error.message)
                     throw new Error("Cadastro mal sucedido")
                 } else {
                     resolve({ error: false, message: "Cadastrou" })
