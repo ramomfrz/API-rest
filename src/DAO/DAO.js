@@ -79,14 +79,27 @@ class DAO {
         })
     }
 
+    static listarHospede(cpf, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, cpf, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
+
     static reservaAtualizada(entidade, id, query) {
         const body = Object.values(entidade)
+
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, id], (error, resultado) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve(resultado)
+                    resolve({ error: false, message: "Dados da reserva atualizados." })
                 }
             })
         })
