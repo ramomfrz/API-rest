@@ -77,17 +77,17 @@ class DAO {
     }
 
     static atualizar(entidade, id, query){
-        const objeto = Object.values(entidade)
+        const body = Object.values(entidade)
         // const objeto = new LimpezaModel(...Object.values(req.body))
 
         return new Promise ((resolve, reject) => {
 
-            Database.run(query, [...objeto, id], (error, result) => {
+            Database.run(query, [...body, id], (error) => {
                 if(error){
                     reject(error.message)
                 }else{
                     // resolve({erro: false, message: `Registro de número ${id} atualizado`})
-                    resolve(result)
+                    resolve({error: false, message: "Dados de limpeza atualizados." })
                 }
             })
         })
