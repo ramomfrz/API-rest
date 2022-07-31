@@ -1,12 +1,13 @@
-import funcionarioModel from "../models/funcionarioModel.js"
-import//importar as validações do services
+import FuncionarioModel from "../models/funcionarioModel.js"
+//import ValidacoesFuncionarios from "../services/ValidacoesFuncionarios.js"
+import ValidacoesService from "../services/ValidacoesService.js"
+
 import DatabaseFuncionariosMetodos from "../DAO/DatabaseFuncionariosMetodos.js"
 import Database from "../database/database.js"
 
-
 DatabaseFuncionariosMetodos.createTableFuncionarios()
 
-class Funcionarios {
+class Funcionarios{
     static rotas(app){
         app.get('/funicionarios', async (req, res) => {
             const response = await
@@ -14,29 +15,32 @@ class Funcionarios {
             res.status(200).json(response)
         })
 
-        app.get('/funcionario', async (req, res) => {
+        app.get('/funcionario/:id', async (req, res) => {
             try{
                 const funcionario = await
                 DatabaseFuncionariosMetodos.listByIdFuncionario(req.params.id)
                 if(!funcionario){
                     throw new Error("Funcionário não encontrado no sistema")
                 }
-                res.status(200).json(limpeza)
+                res.status(200).json(funcionario)
             }catch(error){
                 res.status(404).json(error.message)
-            }//checar se preciso incluir o id ao lado de "/funcionarios"
+            }
         })
 
         app.post('/funcionario', async (req, res) => {
-            const ehValido = ValidacoesFuncionarios.ehValido(...Object.values(req.body))
+            const validarFuncionario = ValidacoesService.validarFuncionario(...Object.values(req.body))
+            console.log(validarFuncionario)
 
             try{
-                if(ehValido){
+                if(validarFuncionario){
                     const funcionario = new FuncionarioModel(...Object.values(req.body))
                     const responde = await
-                    DatabaseFuncionariosMetodos.insertFuncionario(funcionario)
+                    DatabaseFuncionariosMetodos.insertFuncionarios(funcionario)
                     res.status(201).json(responde)
                 }else{
+                    const funcionario = new FuncionarioModel(...Object.values(req.body))
+                    console.log(funcionario)
                     throw new Error("Revise a requisição")
                 }
             }catch(error){
@@ -44,8 +48,8 @@ class Funcionarios {
             }
         })
 
-        app.put('/funcionario', (req, rea) => {
-            const ehValido = ValidacoesFuncionarios.ehValido(...Object.values(req.body))
+        app.put('/funcionario/:id', (req, res) => {
+            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
 
             try{
                 if(ehValido){
@@ -58,12 +62,12 @@ class Funcionarios {
             }catch(error){
                 res.status(400).json(error.message)
             }
-        })//verificar se precisa incluir id
+        })
 
-        app.delete('/funcionario', (req, res) => {
+        app.delete('/funcionario/:id', async (req, res) => {
 
             try{
-                if(ValidacoesFuncionarios.ValidariId(req.params.id, Database.Funcionarios)) {
+                if(ValidacoesService.ValidaiId(req.params.id, Database.Funcionarios)) {
                     const funcionario = DatabaseFuncionariosMetodos.deleteFuncionario(id)
                     res.status(200).json(funcionario)
                 }else{
