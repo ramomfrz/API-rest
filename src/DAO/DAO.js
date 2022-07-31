@@ -76,7 +76,7 @@ class DAO {
         })
     }
 
-    static atualizar(entidade, id, query){
+    static atualizarLimpeza(entidade, id, query){
         const body = Object.values(entidade)
         // const objeto = new LimpezaModel(...Object.values(req.body))
 

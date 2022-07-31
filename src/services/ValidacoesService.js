@@ -57,7 +57,7 @@ export default class ValidacoesService {
 
     static validaControle(controle){
         const limpou = controle
-        return limpou === 1 ? true : false
+        return limpou === 1 || limpou === 0 ? true : false
     }
 
     /**
@@ -66,7 +66,8 @@ export default class ValidacoesService {
      */
 
     static validaIdFuncionario(id_funcionario){
-        return id_funcionario.length > 0 && id_funcionario.length <= 3
+        id_funcionario.length > 0 && id_funcionario.length <= 3 ? true : false
+        return id_funcionario
     }
 
     /**
@@ -78,7 +79,7 @@ export default class ValidacoesService {
      */
 
     static ehValido(numeroQuarto, controle, id_funcionario) {
-        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario)
+        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario) 
     }
 
     static reservaValidada(cpfCliente, numeroQuarto, dataEntrada, dataSaida) {
