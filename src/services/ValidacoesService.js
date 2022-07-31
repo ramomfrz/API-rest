@@ -23,7 +23,6 @@ export default class ValidacoesService {
      * @returns boolean
      */
 
-    //recebe parametro numeroQuarto que vai receber true pra validar que o numeroQuarto foi inserido
     static validaNumeroQuarto(numeroQuarto) {
         if (numeroQuarto >= 1 && numeroQuarto <= 9999) {
             if (typeof (numeroQuarto) != "number") {
@@ -57,11 +56,7 @@ export default class ValidacoesService {
     //recebe parametro controle que vai receber true pra validar se a limpeza está feita
     static validaControle(controle) {
         const limpou = controle
-        if (limpou === 0) {
-            return false
-        } else {
-            return true
-        }
+        return limpou === 1 || limpou === 0 ? true : false
     }
 
     /**
@@ -69,9 +64,9 @@ export default class ValidacoesService {
      * @returns boolean
      */
 
-    //recebe parametro id_funcionario que vai receber true pra verificar se o id_funcionario é válido
-    static validaIdFuncionario(id_funcionario) {
-        return id_funcionario.length >= 1
+    static validaIdFuncionario(id_funcionario){
+        id_funcionario.length > 0 && id_funcionario.length <= 3 ? true : false
+        return id_funcionario
     }
 
     /**
@@ -83,7 +78,7 @@ export default class ValidacoesService {
      */
 
     static ehValido(numeroQuarto, controle, id_funcionario) {
-        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario)
+        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario) 
     }
 
     static reservaValidada(cpfCliente, numeroQuarto, dataEntrada, dataSaida) {

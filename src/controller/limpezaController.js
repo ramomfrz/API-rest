@@ -46,14 +46,14 @@ class Limpezas{
         })
 
         app.put("/limpezas/:id", async (req, res) => {
+            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
 
             try{
-            const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
 
                 if(ehValido){
                     const limpeza = new LimpezaModel(...Object.values(req.body))
                     const resposta = await DatabaseLimpezasMetodos.atualizarLimpezaPorId(req.params.id, limpeza)
-                    res.status(200).json(resposta)
+                    res.status(201).json(resposta)
                 }else{
                     throw new Error("Erro ao atualizar")
                 }
