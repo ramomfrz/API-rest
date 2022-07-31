@@ -21,7 +21,7 @@ class Reservas {
                     throw new Error("Reserva não encontrada para esse CPF")
                 }
             } catch (error) {
-                res.status(500).json(error.message)
+                res.status(404).json(error.message)
             }
         })
 
@@ -37,7 +37,7 @@ class Reservas {
                     throw new Error("Informações inválidas, confira os dados e tente novamente.")
                 }
             } catch (error) {
-                res.status(500).json(error.message)
+                res.status(404).json(error.message)
             }
         })
 
@@ -52,7 +52,7 @@ class Reservas {
                     res.status(404).json({ mensagem: "Reserva não encontrada" })
                 }
             } catch (error) {
-                res.status(500).json({ erro: "Reserva não encontrada" })
+                res.status(404).json({ erro: "Reserva não encontrada" })
             }
         })
 
@@ -65,7 +65,7 @@ class Reservas {
                     throw new Error("Reserva não encontrada para esse CPF")
                 }
             } catch (error) {
-                res.status(500).json({ Error: error.message })
+                res.status(404).json({ Error: error.message })
             }
         })
     }
