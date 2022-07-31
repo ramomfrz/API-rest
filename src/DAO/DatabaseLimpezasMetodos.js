@@ -35,10 +35,10 @@ class DatabaseLimpezasMetodos extends DAO {
         const response = await this.listarLimpeza(id, query)
         return response
     }
-
-    static async atualizarLimpezaPorId(id, valores){
+    
+    static async atualizarLimpezaPorId(id, valores) {
         const query = `UPDATE limpezas SET numeroQuarto = ?, controle = ?, id_funcionario = ? WHERE id = ?`
-        const response = await this.atualizar(id, valores, query)
+        const response = await this.atualizarLimpeza(valores, id, query)
         return response
     }
 
