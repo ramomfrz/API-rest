@@ -9,7 +9,7 @@ test("Validar se o numero do quarto é maior que 1 e menor que 9999", () => {
 });
 
 test("Validar se o numero do quarto é maior que 1 e menor que 999", () => {
-    expect(ValidacoesService.validaNumeroQuarto(64789)).toBe(false)
+    expect(ValidacoesService.validaNumeroQuarto(0)).toBe(false)
 });
 
 test("Validar se foi inserida uma opção válida de limpeza: foi feita", () => {
@@ -25,11 +25,11 @@ test("Validar se foi inserida uma opção válida de limpeza", () => {
 });
 
 test("Verificar funcionário responsável pela limpeza", () => {
-    expect(ValidacoesService.validaIdFuncionario("569")).toBe(true)
+    expect(ValidacoesService.validaIdFuncionario(569)).toBe(true)
 });
 
 test("Verificar funcionário responsável pela limpeza", () => {
-    expect(ValidacoesService.validaIdFuncionario("2467")).toBe(true)
+    expect(ValidacoesService.validaIdFuncionario(2467)).toBe(true)
 });
 
 test("Verificar funcionário responsável pela limpeza", () => {
