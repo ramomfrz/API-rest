@@ -4,9 +4,9 @@ import DatabaseHospedesMetodos from "../DAO/DatabaseHospedesMetodos.js";
 import DAO from "../DAO/DAO.js"
 
 const limpeza = {
-    numeroQuarto: "4",
+    numeroQuarto: 447,
     controle: 1,
-    id_funcionario: "2"
+    id_funcionario: 236
 }
 
 const reserva = {

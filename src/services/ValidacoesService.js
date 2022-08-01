@@ -51,12 +51,12 @@ export default class ValidacoesService {
     /**
      * @param {string} controle
      * @returns boolean
+     * 0 = limpeza não foi feita; 1 = limpeza foi feita
      */
 
-    //recebe parametro controle que vai receber true pra validar se a limpeza está feita
     static validaControle(controle) {
         const limpou = controle
-        return limpou === 1 || limpou === 0 ? true : false
+        return limpou === 1 || limpou === 0
     }
 
     /**
@@ -64,10 +64,32 @@ export default class ValidacoesService {
      * @returns boolean
      */
 
+    // static validaIdFuncionario(id_funcionario){
+    //     id_funcionario.length > 0 && id_funcionario.length <= 3 ? true : false
+    //     return id_funcionario
+    // }
+
+
     static validaIdFuncionario(id_funcionario){
-        id_funcionario.length > 0 && id_funcionario.length <= 3 ? true : false
-        return id_funcionario
+        if (id_funcionario >= 1 && id_funcionario < 9999) {
+            if (typeof (id_funcionario) != "number") {
+                return false
+            } else {
+                return true
+            }
+        }
     }
+
+    static validaIdFuncionario(id_funcionario){        
+        if (typeof (id_funcionario) != "number") {
+            if (id_funcionario >= 1 && id_funcionario < 9999) {
+                return id_funcionario
+            } else {
+                return true
+            }
+        }
+    }
+
 
     /**
      * 
