@@ -123,9 +123,9 @@ class DAO {
             Database.run(query, [...body], (error) => {
                 if (error) {
                     reject(error.message)
-                    throw new Error("Cadastro mal sucedido")
+                    throw new Error("Cadastro mal sucedido. Revise as informações e tente novamente.")
                 } else {
-                    resolve({message: "Cadastrou" })
+                    resolve({ Mensagem: "Registro incluído no sistema com sucesso!" })
                 }
             })
         })
@@ -133,21 +133,21 @@ class DAO {
 
     //  ATUALIZAR //
 
-    static update( entidade, id, query) {
+    static update(entidade, id, query) {
         const body = Object.values(entidade)
-    
+
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, id], (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({message: "Dados atualizados." })
+                    resolve({ Mensagem: "Dados atualizados." })
                 }
             })
         })
     }
 
-    static atualizarLimpeza(entidade, id, query){
+    static atualizarLimpeza(entidade, id, query) {
         const body = Object.values(entidade)
 
         return new Promise((resolve, reject) => {
@@ -156,7 +156,7 @@ class DAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ error: false, message: "Dados de limpeza atualizados." })
+                    resolve({ error: false, Mensagem: "Dados de limpeza atualizados." })
                 }
             })
         })
@@ -170,7 +170,7 @@ class DAO {
                     console.log(`erro na promise: ${error}`)
                     reject(error.message)
                 } else {
-                    resolve("Hospede atualizado!")
+                    resolve("Cadastro de hospede atualizado com sucesso!")
                 }
             })
         })
@@ -184,21 +184,21 @@ class DAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ error: false, message: "Dados da reserva atualizados." })
+                    resolve({ Mensagem: "Os dados da reserva foram atualizados." })
                 }
             })
         })
     }
 
-    static atualizarQuarto(id, entidade, query){
+    static atualizarQuarto(id, entidade, query) {
         const body = Object.values(entidade);
 
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, id], (error) => {
-                if(error){
+                if (error) {
                     reject(error.message)
-                }else{
-                    resolve({message: "Quarto atualizado com sucesso!"})
+                } else {
+                    resolve({ Mensagem: "Quarto atualizado com sucesso!" })
                 }
             })
         })
@@ -213,7 +213,7 @@ class DAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({message: `Registro ${id} deletado!`})
+                    resolve({ Mensagem: `Registro ${id} deletado!` })
                 }
             })
         })
@@ -225,7 +225,7 @@ class DAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({message: `Registro do Id ${id} removido com sucesso`})
+                    resolve({ Mensagem: `Registro do Id ${id} removido com sucesso` })
                 }
             })
         })
@@ -237,20 +237,20 @@ class DAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ message: "Reserva deletada com sucesso!" })
+                    resolve({ Mensagem: "Registro de reserva deletado." })
                 }
             })
         })
     }
 
-    static deletarQuarto(id, query){
+    static deletarQuarto(id, query) {
 
         return new Promise((resolve, reject) => {
             Database.run(query, id, (error) => {
-                if(error){
+                if (error) {
                     reject(error.message)
-                }else{
-                    resolve({message: "Quarto deletado com sucesso!"})
+                } else {
+                    resolve({ Mensagem: "Quarto deletado com sucesso!" })
                 }
             })
         })
