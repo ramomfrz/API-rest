@@ -18,7 +18,7 @@ class Reservas {
                 if (reserva) {
                     res.status(200).json(reserva)
                 } else {
-                    throw new Error("Reserva não encontrada para esse CPF")
+                    throw new Error("Reserva não encontrada para esse CPF. Revise o ID e tente novamente.")
                 }
             } catch (error) {
                 res.status(404).json(error.message)
@@ -47,12 +47,12 @@ class Reservas {
                 if (reservaValidada) {
                     const reserva = new ReservasModel(...Object.values(req.body))
                     const response = await DatabaseReservasMetodos.atualizarReserva(req.params.id, reserva)
-                    res.status(200).json(response)
+                    res.status(201).json(response)
                 } else {
-                    res.status(404).json({ mensagem: "Reserva não encontrada" })
+                    throw new Error("Informações inválidas, confira os dados e tente novamente.")
                 }
             } catch (error) {
-                res.status(404).json({ erro: "Reserva não encontrada" })
+                res.status(404).json(error.message)
             }
         })
 

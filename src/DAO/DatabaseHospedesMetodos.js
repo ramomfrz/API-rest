@@ -5,7 +5,7 @@ class DatabaseHospedesMetodos extends DAO {
   static async createTableHospedes() {
     const query = `
     CREATE TABLE IF NOT EXISTS hospedes(
-      cpf INTEGER PRIMARY KEY NOT NULL,
+      cpf VARCHAR PRIMARY KEY NOT NULL,
       nome VARCHAR NOT NULL,
       numeroQuarto VARCHAR NOT NULL,
       telefone VARCHAR NOT NULL
@@ -34,6 +34,19 @@ class DatabaseHospedesMetodos extends DAO {
     const query = `SELECT * FROM hospedes WHERE cpf = ?`
     
     const response = await this.listarHospede(cpf, query)
+    return response
+  }
+
+  static async atualizarHospedesPorCPF(cpf, entidade) {
+    const query = `UPDATE hospedes SET cpf = ?, nome = ?, numeroQuarto = ?, telefone = ?  WHERE cpf = ?`
+
+    const response = await this.atualizarHospede(cpf, entidade, query)
+    return response
+  }
+
+  static async deletaHospedePorCPF(cpf) {
+    const query = `DELETE * FROM hospedes where cpf = ?`
+    const response = await this.deletaPorCPF(query, cpf)
     return response
   }
 
