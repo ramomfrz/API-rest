@@ -1,19 +1,20 @@
-import DatabaseMetodos from "../DAO/DatabaseMetodos.js";
+import DatabaseQuartosMetodos from "../DAO/DatabaseQuartosMetodos.js";
 import QuartosModel from "../models/QuartosModel.js";
-import ValidacoesQuartos from "../services/ValidacoesQuartos.js";
-import Database from "../database/Database.js";
+import ValidacoesService from "../services/ValidacoesService.js";
+
+DatabaseQuartosMetodos.create();
 
 class Quartos{
     static rotas(app){
         
         app.get("/quartos", async (req, res) => {
-            const response = await DatabaseMetodos.listar()
+            const response = await DatabaseQuartosMetodos.listar()
             res.status(200).json(response)
         })
 
         app.get("/quartos/:id", async (req, res) => {
             try{
-                const quarto = await DatabaseMetodos.listarUm(req.params.id);
+                const quarto = await DatabaseQuartosMetodos.listarUm(req.params.id);
                 if(!quarto){
                     throw new Error("Não foi encontrado um quarto com esse ID")
                 }
@@ -25,11 +26,11 @@ class Quartos{
 
 
         app.post("/quartos", async (req, res) => {
-            const validaGeral =  ValidacoesQuartos.validaGeral(...Object.values(req.body));
+            const validaGeral =  ValidacoesService.validaGeral(...Object.values(req.body));
             try{
                 if(validaGeral){
                     const quarto = new QuartosModel(...Object.values(req.body));
-                    const response = await DatabaseMetodos.inserir(quarto);
+                    const response = await DatabaseQuartosMetodos.insere(quarto);
                     res.status(201).json(response)
                 }else{
                     throw new Error("A requisição está incompleta, revise o corpo")
@@ -40,11 +41,11 @@ class Quartos{
         });
 
         app.put("/quartos/:id", async (req, res) => {
-            const validaGeral =  ValidacoesQuartos.validaGeral(...Object.values(req.body));
+            const validaGeral =  ValidacoesService.validaGeral(...Object.values(req.body));
             try{
                 if(validaGeral){
                     const quarto = new QuartosModel(...Object.values(req.body));
-                    const response = await DatabaseMetodos.atualizar(req.params.id, quarto);
+                    const response = await DatabaseQuartosMetodos.atualizar(req.params.id, quarto);
                     res.status(201).json(response)
                 }else{
                     throw new Error("Falha ao atualizar o quarto")
@@ -56,7 +57,7 @@ class Quartos{
 
         app.delete("/quartos/:id", async (req, res) => {
             try{
-                const quarto = await DatabaseMetodos.deletar(req.params.id);
+                const quarto = await DatabaseQuartosMetodos.deletar(req.params.id);
                 if(!quarto){
                     throw new Error("Não foi encontrado um quarto com esse ID")
                 }

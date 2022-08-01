@@ -28,9 +28,21 @@ const hospede = {
     telefone: '1998746712'
 }
 
+const quarto = {
+    numeroQuarto: "315",
+    nomeHospedes: 'Rodinei',
+    controle: 1,
+    telefone: '113424252'
+}
+
 try {
 
+    //  CRIA ENTIDADE //
+
     await DAO.ativaForeignKeys()
+
+    const quartos = await DatabaseLimpezasMetodos.createTableLimpezas()
+    console.log(quartos, "Tabela de Quartos criada.")
 
     const limpezas = await DatabaseLimpezasMetodos.createTableLimpezas()
     console.log(limpezas, "Limpezas")
@@ -41,19 +53,26 @@ try {
     const hospedes = await DatabaseHospedesMetodos.createTableHospedes()
     console.log(hospedes, "Tabela de hospedes criada.")
 
+    const funcionario = await DatabaseFuncionariosMetodos.createTableFuncionarios()
+    console.log(funcionario, "Registro criado")
+
+//  INSERIR NA ENTIDADE //
+
     const criouLimpeza = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
     console.log(criouLimpeza)
 
     const reservaRegistrada = await DatabaseReservasMetodos.inserirReserva(reserva)
     console.log(reservaRegistrada, "Reserva registrada com sucesso.")
 
-   const funcionario = await DatabaseFuncionariosMetodos.createTableFuncionarios()
-   console.log(funcionario, "Registro criado")
-   
     const funcionarioAdicionado = await DatabaseFuncionariosMetodos.inserir(funcionarios)
     console.log(funcionarioAdicionado, "Funcionário adicionado com sucesso.")
-    
 
+    const hospedesAdicionado = await DatabaseFuncionariosMetodos.inserir(hospede)
+    console.log(hospedesAdicionado, "Hospede adicionado com sucesso.")
+
+    const QuartoAdd = await DatabaseFuncionariosMetodos.inserir(quarto)
+    console.log(QuartoAdd, "Quarto adicionado com sucesso.")
+    
 } catch (error) {
-    console.log("Error: ", error)
+    console.log(error)
 }

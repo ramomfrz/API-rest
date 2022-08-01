@@ -1,6 +1,6 @@
-import DAOquartos from "./DAOquartos.js";
+import DAO from "./DAO.js";
 
-class DatabaseMetodos extends DAOquartos {
+class DatabaseMetodos extends DAO {
     
     static async create(){
 
@@ -20,32 +20,32 @@ class DatabaseMetodos extends DAOquartos {
 
     static async listar(){
         const query = `SELECT * FROM quartos`;
-        const response = await this.listarQuartos(query)
+        const response = await this.listarTodas(query)
         return response
     }
 
     static async listarUm(id){
         const query = `SELECT * FROM quartos WHERE id = ?`;
-        const response = await this.listarQuarto(id, query)
+        const response = await this.listarPorId(id, query)
         return response
     }
 
-    static async inserir(entidade){
+    static async insere(entidade){
         const query = `INSERT INTO quartos (numeroQuarto, nomeHospedes, controle, telefone) VALUES (?,?,?,?)`;
-        const response = await this.inserirQuarto(entidade, query)
+        const response = await this.inserir(entidade, query)
         return response
     }
 
 
     static async atualizar(id, entidade){
         const query = `UPDATE quartos SET numeroQuarto=?, nomeHospedes=?, controle=?, telefone=? WHERE id=?`;
-        const response = await this.atualizarQuarto(id, entidade, query)
+        const response = await this.update(entidade, id, query)
         return response
     }
 
     static async deletar(id){
         const query = `DELETE FROM quartos WHERE id = ?`;
-        const response = await this.deletarQuarto(id, query)
+        const response = await this.delete(id, query)
         return response
     }
 }
