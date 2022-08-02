@@ -51,7 +51,7 @@ class Reservas {
                     }
                     const reserva = new ReservasModel(...Object.values(req.body))
                     const response = await DatabaseReservasMetodos.atualizarReserva(req.params.id, reserva)
-                    res.status(201).json(response)
+                    res.status(200).json(response)
                 } else {
                     throw new Error("Informações inválidas, confira os dados e tente novamente.")
                 }
