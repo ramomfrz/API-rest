@@ -65,11 +65,10 @@ export default class ValidacoesService {
 
     //  VALIDAR ID_FUNCIONARIO    //
 
-    // static validaIdFuncionario(id_funcionario){
-    //     id_funcionario.length > 0 && id_funcionario.length <= 3 ? true : false
-    //     return id_funcionario
-    // }
-
+    /**
+     * @param {string} id_funcionario
+     * @returns boolean
+     */
 
     static validaIdFuncionario(id_funcionario){
         if (id_funcionario >= 1 && id_funcionario < 9999) {
