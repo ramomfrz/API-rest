@@ -51,19 +51,33 @@ export default class ValidacoesService {
     }
 
     //  VALIDAR CONTROLE  //
-
-    //recebe parametro controle que vai receber true pra validar se a limpeza está feita
     
+    /**
+     * @param {string} controle
+     * @returns boolean
+     * 0 = limpeza não foi feita; 1 = limpeza foi feita
+     */
+
     static validaControle(controle) {
         const limpou = controle
-        return limpou === 1 || limpou === 0 ? true : false
+        return limpou === 1 || limpou === 0
     }
 
     //  VALIDAR ID_FUNCIONARIO    //
 
+    /**
+     * @param {string} id_funcionario
+     * @returns boolean
+     */
+
     static validaIdFuncionario(id_funcionario){
-        id_funcionario.length > 0 && id_funcionario.length <= 3 ? true : false
-        return id_funcionario
+        if (id_funcionario >= 1 && id_funcionario < 9999) {
+            if (typeof (id_funcionario) != "number") {
+                return false
+            } else {
+                return true
+            }
+        }
     }
 
     //  VALIDAR TELEFONE  //
@@ -80,6 +94,14 @@ export default class ValidacoesService {
     static validarFuncionario(nome, data_admissao){
         return this.ValidarNome(nome) && this.validaDataAdmissao(data_admissao)
     }
+
+    /**
+     * 
+     * @param {string} numeroQuarto 
+     * @param {string} controle 
+     * @param {string} id_funcionario 
+     * @returns boolean
+     */
 
     static ehValido(numeroQuarto, controle, id_funcionario) {
         return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario) 
