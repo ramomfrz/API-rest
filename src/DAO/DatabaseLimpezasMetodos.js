@@ -32,19 +32,19 @@ class DatabaseLimpezasMetodos extends DAO {
 
     static async listarLimpezaPorId(id){
         const query = `SELECT * FROM limpezas WHERE id = ?`
-        const response = await this.listarLimpeza(id, query)
+        const response = await this.listarPorId(id, query)
         return response
     }
     
     static async atualizarLimpezaPorId(id, valores) {
         const query = `UPDATE limpezas SET numeroQuarto = ?, controle = ?, id_funcionario = ? WHERE id = ?`
-        const response = await this.atualizarLimpeza(valores, id, query)
+        const response = await this.update(valores, id, query)
         return response
     }
 
     static async deletarLimpezaPorId(id){
         const query = `DELETE FROM limpezas WHERE id=?`
-        const response = await this.deletar(query, id)
+        const response = await this.delete(id, query)
         return response
     }
 }
