@@ -38,8 +38,7 @@ class DAO {
 
             Database.run(query, [...body], (error) => {
                 if (error) {
-                    reject(error.message)
-                    throw new Error("Cadastro mal sucedido")
+                    reject(error.message)                    
                 } else {
                     resolve({ error: false, message: "Cadastrou" })
                 }
@@ -163,7 +162,7 @@ class DAO {
                     console.log(`erro na promise: ${error}`)
                     reject(error.message)
                 } else {
-                    resolve("Hospede atualizado!")
+                    resolve({error: false, message: `Hospede cpf ${cpf} atualizado com sucesso.`})
                 }
             })
         })
@@ -220,6 +219,18 @@ static delete(id, query) {
                     reject(error.message)
                 } else {
                     resolve({ erro: false, message: `Registro do Id ${id} removido com sucesso`})
+                }
+            })
+        })
+    }
+
+    static deletaPorCPF(query, cpf) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, cpf, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({erro: false, message: `Registro com cpf ${cpf} apagado com sucesso!`})
                 }
             })
         })
