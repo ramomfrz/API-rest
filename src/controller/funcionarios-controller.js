@@ -27,7 +27,6 @@ class Funcionarios{
 
         app.post('/funcionario', async (req, res) => {
             const validarFuncionario = ValidacoesService.validarFuncionario(...Object.values(req.body))
-git 
             try{
                 if(validarFuncionario){
                     const funcionario = new FuncionarioModel(...Object.values(req.body))
