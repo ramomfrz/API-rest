@@ -81,5 +81,4 @@ class Hospedes {
   }  
 }
 
-
 export default Hospedes
