@@ -62,8 +62,8 @@ class Reservas {
 
         app.delete("/reservas/:id", async (req, res) => {
             try {
-                const reserva = await DatabaseReservasMetodos.excluirReserva(req.params.id)
                 const encontraReserva = await DatabaseReservasMetodos.listarReservasPorID(req.params.id)
+                const reserva = await DatabaseReservasMetodos.excluirReserva(req.params.id)
                 if (!encontraReserva) {
                     throw new Error("Reserva não encontrada em nosso sistema.")
                 }
