@@ -45,7 +45,7 @@ class DatabaseHospedesMetodos extends DAO {
   }
 
   static async deletaHospedePorCPF(cpf) {
-    const query = `DELETE * FROM hospedes where cpf = ?`
+    const query = `DELETE FROM hospedes WHERE cpf = ?`
     const response = await this.deletaPorCPF(query, cpf)
     return response
   }

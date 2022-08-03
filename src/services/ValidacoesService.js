@@ -11,13 +11,15 @@ export default class ValidacoesService {
             } else {
                 return true
             }
-        }
+        } return numeroQuarto
     }
-
+    
     static validaCPF(CPF) {
         const regexCPF = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/
         return regexCPF.test(CPF)
     }
+
+    //  VALIDAR DATA  //
 
     static validaDataEntrada(dataEntrada) {
         const regexData = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
@@ -29,17 +31,11 @@ export default class ValidacoesService {
         return regexData.test(dataSaida)
     }
 
-    static validaDataAdmissao(data_admissao) {
-        const regexData = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
-        return regexData.test(data_admissao)
-    }
-
     /**
      * @param {string} controle
      * @returns boolean
      * 0 = limpeza não foi feita; 1 = limpeza foi feita
      */
-
     static validaControle(controle) {
         const limpou = controle
         return limpou === 1 || limpou === 0
@@ -49,7 +45,6 @@ export default class ValidacoesService {
      * @param {string} id_funcionario
      * @returns boolean
      */
-
     static validaIdFuncionario(id_funcionario) {
         if (id_funcionario >= 1 && id_funcionario < 9999) {
             if (typeof (id_funcionario) != "number") {
@@ -57,16 +52,20 @@ export default class ValidacoesService {
             } else {
                 return true
             }
-        }
+        } return id_funcionario
     }
 
     static validaTelefone(telefone) {
+        if(telefone.length <= 9){
         const telefoneValidado = parseInt(telefone)
         return telefoneValidado == telefone
+        }else{
+            return false
+        }
     }
 
-    static validarFuncionario(nome, data_admissao) {
-        return this.validaNome(nome) && this.validaDataAdmissao(data_admissao)
+    static validarFuncionario(nome, dataEntrada) {
+        return this.validaNome(nome) && this.validaDataEntrada(dataEntrada)
     }
 
     /**
@@ -74,11 +73,12 @@ export default class ValidacoesService {
      * @param {string} numeroQuarto 
      * @param {string} controle 
      * @param {string} id_funcionario 
+     * @param {date} data
      * @returns boolean
      */
 
-    static ehValido(numeroQuarto, controle, id_funcionario) {
-        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario)
+    static ehValido(numeroQuarto, controle, id_funcionario, dataEntrada) {
+        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario) && this.validaDataEntrada(dataEntrada) 
     }
 
     static reservaValidada(cpfCliente, nome, numeroQuarto, dataEntrada, dataSaida) {

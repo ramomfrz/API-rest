@@ -62,20 +62,6 @@ class DAO {
         })
     }
 
-    static listarLimpeza(id, query) {
-
-        return new Promise((resolve, reject) => {
-
-            Database.all(query, id, (error, res) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve(res)
-                }
-            })
-        })
-    }
-
     static listarReserva(id, query) {
         return new Promise((resolve, reject) => {
             Database.get(query, id, (error, resultado) => {
@@ -122,8 +108,7 @@ class DAO {
 
             Database.run(query, [...body], (error) => {
                 if (error) {
-                    reject(error.message)
-                    throw new Error("Cadastro mal sucedido. Revise as informações e tente novamente.")
+                    reject({error: true, message: error.message})
                 } else {
                     resolve({ Mensagem: "Registro incluído no sistema com sucesso!" })
                 }
@@ -147,30 +132,14 @@ class DAO {
         })
     }
 
-    static atualizarLimpeza(entidade, id, query) {
-        const body = Object.values(entidade)
-
-        return new Promise((resolve, reject) => {
-
-            Database.run(query, [...body, id], (error) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve({ error: false, Mensagem: "Dados de limpeza atualizados." })
-                }
-            })
-        })
-    }
-
     static atualizarHospede(cpf, entidade, query) {
         const body = Object.values(entidade)
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, cpf], (error) => {
                 if (error) {
-                    console.log(`erro na promise: ${error}`)
-                    reject(error.message)
+                    reject({error: true, message: error.message})
                 } else {
-                    resolve("Cadastro de hospede atualizado com sucesso!")
+                    resolve({error: false, message: `Hospede cpf ${cpf} atualizado com sucesso.`})
                 }
             })
         })
@@ -206,19 +175,6 @@ class DAO {
 
     //  DELETAR //
 
-    static deletar(query, id) {
-
-        return new Promise((resolve, reject) => {
-            Database.run(query, id, (error) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve({ Mensagem: `Registro ${id} deletado!` })
-                }
-            })
-        })
-    }
-
     static delete(id, query) {
         return new Promise((resolve, reject) => {
             Database.run(query, id, (error) => {
@@ -251,6 +207,18 @@ class DAO {
                     reject(error.message)
                 } else {
                     resolve({ Mensagem: "Quarto deletado com sucesso!" })
+                }
+            })
+        })
+    }
+
+    static deletaPorCPF(query, cpf) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, cpf, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({erro: false, message: `Registro com cpf ${cpf} apagado com sucesso!`})
                 }
             })
         })

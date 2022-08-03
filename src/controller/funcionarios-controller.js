@@ -27,16 +27,13 @@ class Funcionarios{
 
         app.post('/funcionario', async (req, res) => {
             const validarFuncionario = ValidacoesService.validarFuncionario(...Object.values(req.body))
-            console.log(validarFuncionario)
-
+git 
             try{
                 if(validarFuncionario){
                     const funcionario = new FuncionarioModel(...Object.values(req.body))
                     const response = await DatabaseFuncionariosMetodos.insertFuncionarios(funcionario)
                     res.status(201).json(response)
                 }else{
-                    const funcionario = new FuncionarioModel(...Object.values(req.body))
-                    console.log(funcionario)
                     throw new Error("Revise a requisição")
                 }
             }catch(error){
@@ -51,8 +48,7 @@ class Funcionarios{
                 if(validarFuncionario){
                     const funcionario = new FuncionarioModel(...Object.values(req.body))
                     const responde = await DatabaseFuncionariosMetodos.updateFuncionarios(req.params.id, funcionario)
-                    res.status(201).json(responde)
-                    console.log(responde)
+                    res.status(200).json(responde)
                 }else {
                     throw new Error("Inválido")
 
