@@ -42,7 +42,7 @@ class Hospedes {
       }
     })   
 
-    app.put("/hospedes/:cpf", (req, res) => {
+    app.put("/hospedes/:cpf", async (req, res) => {
       const validaHospede = ValidacoesService.validaHospede(...Object.values(req.body));
       console.log(validaHospede)
 
@@ -50,8 +50,7 @@ class Hospedes {
         if (validaHospede) {
           const hospede = new HospedeModel(...Object.values(req.body));
           
-          const response = DatabaseHospedesMetodos.atualizarHospedesPorCPF(req.params.cpf, hospede)        
-          console.log(response)
+          const response = await DatabaseHospedesMetodos.atualizarHospedesPorCPF(req.params.cpf, hospede)        
           res.status(201).json(response)
         } else {               
           throw new Error("Atualização de informações não realizada. Verifique se os dados da requisição estão corretos.")
@@ -65,13 +64,13 @@ class Hospedes {
     app.delete("/hospedes/:cpf", async (req, res) => {
       try {
         const hospede = await DatabaseHospedesMetodos.deletaHospedePorCPF(req.params.cpf)
-        console.log(hospede)
         if(!hospede) {
           throw new Error("Hospede não encontrado.")
-        }
-        res.status(200).json(hospede)
+        } else {
+          res.status(200).json(hospede)
+        }       
       } catch (error) {
-        res.status(404).json({Error: error.message})
+        res.status(404).json(error.message)
       }
     })
 
