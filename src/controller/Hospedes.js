@@ -43,10 +43,15 @@ class Hospedes {
     })   
 
     app.put("/hospedes/:cpf", async (req, res) => {
-      const validaHospede = ValidacoesService.validaHospede(...Object.values(req.body));
-      console.log(validaHospede)
+      
 
       try {
+        const validaHospede = ValidacoesService.validaHospede(...Object.values(req.body));
+        const encontraHospede = await DatabaseHospedesMetodos.listarHospedePorCPF(req.params.cpf)
+
+        if (!encontraHospede) {
+          throw new Error("Hospede não encontrado em nosso sistema.")
+        }
         if (validaHospede) {
           const hospede = new HospedeModel(...Object.values(req.body));
           
@@ -57,26 +62,22 @@ class Hospedes {
         }
       } catch (error) {
         res.status(400).json(error.message)
-      }
-      
+      }      
     })   
 
     app.delete("/hospedes/:cpf", async (req, res) => {
       try {
-        const hospede = await DatabaseHospedesMetodos.deletaHospedePorCPF(req.params.cpf)
-        if(!hospede) {
+        const encontraHospede = await DatabaseHospedesMetodos.listarHospedePorCPF(req.params.cpf)
+        if(!encontraHospede) {
           throw new Error("Hospede não encontrado.")
         } else {
-          res.status(200).json(hospede)
-        }       
+          const deletarHospede = await DatabaseHospedesMetodos.deletaHospedePorCPF(req.params.cpf)
+          res.status(200).json(deletarHospede)
+        }              
       } catch (error) {
         res.status(404).json(error.message)
       }
     })
-
-    
-
-
   }  
 }
 
