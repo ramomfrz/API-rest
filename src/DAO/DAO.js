@@ -30,22 +30,7 @@ class DAO {
         })
     }
 
-    static inserir(entidade, query) {
-
-        const body = Object.values(entidade)
-
-        return new Promise((resolve, reject) => {
-
-            Database.run(query, [...body], (error) => {
-                if (error) {
-                    reject(error.message)                    
-                } else {
-                    resolve({ error: false, message: "Cadastrou" })
-                }
-            })
-        })
-    }
-
+    //  LISTAR TODOS  //
 
     static listarTodas(query) {
 
@@ -61,31 +46,17 @@ class DAO {
         })
     }
 
-    static listarLimpeza(id, query) {
+    //  LISTAR POR ID //
+
+    static listarPorId(id, query) {
 
         return new Promise((resolve, reject) => {
 
-            Database.all(query, id, (error, res) => {
+            Database.get(query, id, (error, res) => {
                 if (error) {
                     reject(error.message)
                 } else {
                     resolve(res)
-                }
-            })
-        })
-    }
-
-    static atualizarLimpeza(entidade, id, query){
-        const body = Object.values(entidade)
-
-        return new Promise((resolve, reject) => {
-
-            Database.run(query, [...body, id], (error) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    // resolve({erro: false, message: `Registro de número ${id} atualizado`})
-                    resolve({ error: false, message: "Dados de limpeza atualizados." })
                 }
             })
         })
@@ -103,19 +74,6 @@ class DAO {
         })
     }
 
-    static deletar(query, id) {
-
-        return new Promise((resolve, reject) => {
-            Database.run(query, id, (error) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve({ error: false, message: `Registro ${id} deletado!` })
-                }
-            })
-        })
-    }
-
     static listarHospede(cpf, query) {
         return new Promise((resolve, reject) => {
             Database.get(query, cpf, (error, resultado) => {
@@ -128,7 +86,40 @@ class DAO {
         })
     }
 
-    static reservaAtualizada(entidade, id, query) {
+    static listFuncionario(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.get(query, id, (error, resultado) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve(resultado)
+                }
+            })
+        })
+    }
+
+    //  INSERIR  //
+
+    static inserir(entidade, query) {
+
+        const body = Object.values(entidade)
+
+        return new Promise((resolve, reject) => {
+
+            Database.run(query, [...body], (error) => {
+                if (error) {
+                    reject(error.message)
+                    throw new Error("Cadastro mal sucedido. Revise as informações e tente novamente.")
+                } else {
+                    resolve({ Mensagem: "Registro incluído no sistema com sucesso!" })
+                }
+            })
+        })
+    }
+
+    //  ATUALIZAR //
+
+    static update(entidade, id, query) {
         const body = Object.values(entidade)
 
         return new Promise((resolve, reject) => {
@@ -136,19 +127,7 @@ class DAO {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ error: false, message: "Dados da reserva atualizados." })
-                }
-            })
-        })
-    }
-
-    static deletaReserva(id, query) {
-        return new Promise((resolve, reject) => {
-            Database.run(query, id, (error) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve({ message: "Reserva deletada com sucesso!" })
+                    resolve({ Mensagem: "Dados atualizados." })
                 }
             })
         })
@@ -167,58 +146,69 @@ class DAO {
             })
         })
     }
-        
-    static listFuncionario(id, query) {
+
+    static reservaAtualizada(entidade, id, query) {
+        const body = Object.values(entidade)
+
         return new Promise((resolve, reject) => {
-            Database.get(query, id, (error, resultado) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve(resultado)
+            Database.run(query, [...body, id], (result, error) => {
+                if (error == null) {
+                    return resolve({ Mensagem: "Os dados da reserva foram atualizados." })
                 }
+                console.log(error)
+                return reject(error.message)
             })
         })
     }
 
-    
-
-    static listarPorId(id, query) {
-
-        return new Promise((resolve, reject) => {
-
-            Database.all(query, id, (error, res) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve(res)
-                }
-            })
-        })
-    }
-
-
-static update( entidade, id, query) {
-    const body = Object.values(entidade)
+    static atualizarQuarto(id, entidade, query) {
+        const body = Object.values(entidade);
 
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, id], (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ error: false, message: "Dados atualizados." })
+                    resolve({ Mensagem: "Quarto atualizado com sucesso!" })
                 }
             })
         })
     }
 
+    //  DELETAR //
 
-static delete(id, query) {
+    static delete(id, query) {
         return new Promise((resolve, reject) => {
             Database.run(query, id, (error) => {
                 if (error) {
                     reject(error.message)
                 } else {
-                    resolve({ erro: false, message: `Registro do Id ${id} removido com sucesso`})
+                    resolve({ Mensagem: `Registro do Id ${id} removido com sucesso` })
+                }
+            })
+        })
+    }
+
+    static deletaReserva(id, query) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ Mensagem: "Registro de reserva deletado." })
+                }
+            })
+        })
+    }
+
+    static deletarQuarto(id, query) {
+
+        return new Promise((resolve, reject) => {
+            Database.run(query, id, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({ Mensagem: "Quarto deletado com sucesso!" })
                 }
             })
         })

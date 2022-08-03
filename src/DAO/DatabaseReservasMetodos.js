@@ -6,6 +6,7 @@ class DatabaseReservasMetodos extends DAO {
         const query = `CREATE TABLE IF NOT EXISTS reservas(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         CPF VARCHAR NOT NULL,
+        nome VARCHAR NOT NULL,
         numeroQuarto VARCHAR NOT NULL,
         dataEntrada DATE NOT NULL,
         dataSaida DATE NOT NULL
@@ -15,7 +16,7 @@ class DatabaseReservasMetodos extends DAO {
     }
 
     static async inserirReserva(reserva) {
-        const query = `INSERT INTO reservas (CPF, numeroQuarto, dataEntrada, dataSaida) VALUES (?,?,?,?)`
+        const query = `INSERT INTO reservas (CPF, nome, numeroQuarto, dataEntrada, dataSaida) VALUES (?,?,?,?,?)`
         const response = await this.inserir(reserva, query)
         return response
     }
@@ -30,7 +31,7 @@ class DatabaseReservasMetodos extends DAO {
         return response
     }
     static async atualizarReserva(id, valores) {
-        const query = `UPDATE reservas SET CPF = ?, numeroQuarto = ?, dataEntrada = ?, dataSaida = ? WHERE id = ?`
+        const query = `UPDATE reservas SET CPF = ?, nome = ?, numeroQuarto = ?, dataEntrada = ?, dataSaida = ? WHERE id = ?`
         const response = await this.reservaAtualizada(valores, id, query)
         return response
     }
