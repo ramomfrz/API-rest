@@ -38,8 +38,7 @@ class Hospedes {
           throw new Error("Cadastro não realizado. Verifique se os dados da requisição estão corretos." );
         }
       } catch (error) {
-        console.log(error)
-        res.status(400).json(error);
+        res.status(400).json(error.message);
       }
     })   
 
