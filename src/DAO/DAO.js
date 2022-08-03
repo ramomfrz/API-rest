@@ -108,8 +108,7 @@ class DAO {
 
             Database.run(query, [...body], (error) => {
                 if (error) {
-                    reject(error.message)
-                    throw new Error("Cadastro mal sucedido. Revise as informações e tente novamente.")
+                    reject({error: true, message: error.message})
                 } else {
                     resolve({ Mensagem: "Registro incluído no sistema com sucesso!" })
                 }
@@ -138,10 +137,9 @@ class DAO {
         return new Promise((resolve, reject) => {
             Database.run(query, [...body, cpf], (error) => {
                 if (error) {
-                    console.log(`erro na promise: ${error}`)
-                    reject(error.message)
+                    reject({error: true, message: error.message})
                 } else {
-                    resolve("Cadastro de hospede atualizado com sucesso!")
+                    resolve({error: false, message: `Hospede cpf ${cpf} atualizado com sucesso.`})
                 }
             })
         })
@@ -209,6 +207,18 @@ class DAO {
                     reject(error.message)
                 } else {
                     resolve({ Mensagem: "Quarto deletado com sucesso!" })
+                }
+            })
+        })
+    }
+
+    static deletaPorCPF(query, cpf) {
+        return new Promise((resolve, reject) => {
+            Database.run(query, cpf, (error) => {
+                if (error) {
+                    reject(error.message)
+                } else {
+                    resolve({erro: false, message: `Registro com cpf ${cpf} apagado com sucesso!`})
                 }
             })
         })
