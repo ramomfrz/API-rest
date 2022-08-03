@@ -151,12 +151,12 @@ class DAO {
         const body = Object.values(entidade)
 
         return new Promise((resolve, reject) => {
-            Database.run(query, [...body, id], (error) => {
-                if (error) {
-                    reject(error.message)
-                } else {
-                    resolve({ Mensagem: "Os dados da reserva foram atualizados." })
+            Database.run(query, [...body, id], (result, error) => {
+                if (error == null) {
+                    return resolve({ Mensagem: "Os dados da reserva foram atualizados." })
                 }
+                console.log(error)
+                return reject(error.message)
             })
         })
     }

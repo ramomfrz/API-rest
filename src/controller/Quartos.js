@@ -46,7 +46,7 @@ class Quartos{
                 if(validaGeral){
                     const quarto = new QuartosModel(...Object.values(req.body));
                     const response = await DatabaseQuartosMetodos.atualizar(req.params.id, quarto);
-                    res.status(201).json(response)
+                    res.status(200).json(response)
                 }else{
                     throw new Error("Falha ao atualizar o quarto")
                 }

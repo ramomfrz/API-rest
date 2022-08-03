@@ -12,6 +12,7 @@ const limpeza = {
 
 const reserva = {
     CPF: "12345678912",
+    nome: "Ramom Silva",
     numeroQuarto: "4",
     dataEntrada: "01/01/22",
     dataSaida: "10/01/22"
@@ -57,7 +58,7 @@ try {
     const funcionario = await DatabaseFuncionariosMetodos.createTableFuncionarios()
     console.log(funcionario, "Registro criado")
 
-//  INSERIR NA ENTIDADE //
+    //  INSERIR NA ENTIDADE //
 
     const criouLimpeza = await DatabaseLimpezasMetodos.inserirLimpeza(limpeza)
     console.log(criouLimpeza)
@@ -73,7 +74,7 @@ try {
 
     const QuartoAdd = await DatabaseFuncionariosMetodos.inserir(quarto)
     console.log(QuartoAdd, "Quarto adicionado com sucesso.")
-    
+
 } catch (error) {
     console.log(error)
 }

@@ -45,9 +45,13 @@ class Reservas {
             try {
                 const reservaValidada = ValidacoesService.reservaValidada(...Object.values(req.body))
                 if (reservaValidada) {
+                    const encontraReserva = await DatabaseReservasMetodos.listarReservasPorID(req.params.id)
+                    if (!encontraReserva) {
+                        throw new Error("Reserva não encontrada em nosso sistema.")
+                    }
                     const reserva = new ReservasModel(...Object.values(req.body))
                     const response = await DatabaseReservasMetodos.atualizarReserva(req.params.id, reserva)
-                    res.status(201).json(response)
+                    res.status(200).json(response)
                 } else {
                     throw new Error("Informações inválidas, confira os dados e tente novamente.")
                 }
