@@ -9,7 +9,8 @@ class DatabaseLimpezasMetodos extends DAO {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             numeroQuarto VARCHAR NOT NULL,
             controle TINYINT NOT NULL,
-            id_funcionario VARCHAR NOT NULL
+            id_funcionario VARCHAR NOT NULL,
+            dataEntrada DATE NOT NULL
         )
         `
 
@@ -19,7 +20,7 @@ class DatabaseLimpezasMetodos extends DAO {
     }
 
     static async inserirLimpeza(limpeza){
-        const query = `INSERT INTO limpezas (numeroQuarto, controle, id_funcionario) VALUES (?,?,?)`
+        const query = `INSERT INTO limpezas (numeroQuarto, controle, id_funcionario, dataEntrada) VALUES (?,?,?,?)`
         const response = await this.inserir(limpeza, query)
         return response
     }
@@ -37,7 +38,7 @@ class DatabaseLimpezasMetodos extends DAO {
     }
     
     static async atualizarLimpezaPorId(id, valores) {
-        const query = `UPDATE limpezas SET numeroQuarto = ?, controle = ?, id_funcionario = ? WHERE id = ?`
+        const query = `UPDATE limpezas SET numeroQuarto = ?, controle = ?, id_funcionario = ?, dataEntrada = ? WHERE id = ?`
         const response = await this.update(valores, id, query)
         return response
     }

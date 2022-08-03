@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 export default class ValidacoesService {
 
     //  VALIDAR NOME    //
@@ -23,7 +24,7 @@ export default class ValidacoesService {
             } else {
                 return true
             }
-        }
+        } return numeroQuarto
     }
 
     //  VALIDAR CPF   //
@@ -34,6 +35,12 @@ export default class ValidacoesService {
     }
 
     //  VALIDAR DATA  //
+
+
+    // static validaData(data) {
+    //     const dataFormatada = dayjs(data).format('L')
+    //     return dataFormatada
+    // }
 
     static validaDataEntrada(dataEntrada) {
         const regexData = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
@@ -77,7 +84,7 @@ export default class ValidacoesService {
             } else {
                 return true
             }
-        }
+        } return id_funcionario
     }
 
     //  VALIDAR TELEFONE  //
@@ -100,11 +107,12 @@ export default class ValidacoesService {
      * @param {string} numeroQuarto 
      * @param {string} controle 
      * @param {string} id_funcionario 
+     * @param {date} data
      * @returns boolean
      */
 
-    static ehValido(numeroQuarto, controle, id_funcionario) {
-        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario) 
+    static ehValido(numeroQuarto, controle, id_funcionario, dataEntrada) {
+        return this.validaNumeroQuarto(numeroQuarto) && this.validaControle(controle) && this.validaIdFuncionario(id_funcionario) && this.validaDataEntrada(dataEntrada) 
     }
 
     static reservaValidada(cpfCliente, numeroQuarto, dataEntrada, dataSaida) {

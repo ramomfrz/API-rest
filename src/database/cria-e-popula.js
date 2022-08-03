@@ -6,7 +6,8 @@ import DAO from "../DAO/DAO.js"
 const limpeza = {
     numeroQuarto: 447,
     controle: 1,
-    id_funcionario: 236
+    id_funcionario: 236,
+    data: "24/05/2022"
 }
 
 const reserva = {
