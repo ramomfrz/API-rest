@@ -71,4 +71,5 @@ class Funcionarios{
     }
 }
 
+
 export default Funcionarios
