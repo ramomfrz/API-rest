@@ -149,12 +149,11 @@ class DAO {
         const body = Object.values(entidade)
 
         return new Promise((resolve, reject) => {
-            Database.run(query, [...body, id], (result, error) => {
-                if (error == null) {
+            Database.run(query, [...body, id], function () {
+                if (this.changes == 1) {
                     return resolve({ Mensagem: "Os dados da reserva foram atualizados." })
                 }
-                console.log(error)
-                return reject(error.message)
+                return reject({ message: "Erro na atualização de reserva, ID não encontrado." })
             })
         })
     }
@@ -189,9 +188,9 @@ class DAO {
 
     static deletaReserva(id, query) {
         return new Promise((resolve, reject) => {
-            Database.run(query, id, (error) => {
-                if (error) {
-                    reject(error.message)
+            Database.run(query, id, function () {
+                if (this.changes == 0) {
+                    reject({ message: "Falha ao deletar a reserva, ID não encontrado." })
                 } else {
                     resolve({ Mensagem: "Registro de reserva deletado." })
                 }
