@@ -53,7 +53,7 @@ class Limpezas{
                 if(ehValido){
                     const limpeza = new LimpezaModel(...Object.values(req.body))
                     const resposta = await DatabaseLimpezasMetodos.atualizarLimpezaPorId(req.params.id, limpeza)
-                    res.status(201).json(resposta)
+                    res.status(200).json(resposta)
                 }else{
                     throw new Error("Erro ao atualizar")
                 }
