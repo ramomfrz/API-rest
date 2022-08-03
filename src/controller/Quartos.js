@@ -42,13 +42,17 @@ class Quartos{
 
         app.put("/quartos/:id", async (req, res) => {
             const validaGeral =  ValidacoesService.validaGeral(...Object.values(req.body));
+            const encontraQuarto = await DatabaseQuartosMetodos.listarUm(req.params.id);
             try{
-                if(validaGeral){
+                if (validaGeral) {
+                    if (!encontraQuarto) {
+                    throw new Error("Não foi encontrado um quarto com esse ID")
+                }
                     const quarto = new QuartosModel(...Object.values(req.body));
                     const response = await DatabaseQuartosMetodos.atualizar(req.params.id, quarto);
                     res.status(200).json(response)
                 }else{
-                    throw new Error("Falha ao atualizar o quarto")
+                    throw new Error("Falha ao atualizar o quarto, confira os dados.")
                 }
             }catch(error){
                 res.status(400).json(error.message)
@@ -57,11 +61,14 @@ class Quartos{
 
         app.delete("/quartos/:id", async (req, res) => {
             try{
-                const quarto = await DatabaseQuartosMetodos.deletar(req.params.id);
-                if(!quarto){
+                const encontraQuarto = await DatabaseQuartosMetodos.listarUm(req.params.id);
+    
+                if(!encontraQuarto){
                     throw new Error("Não foi encontrado um quarto com esse ID")
+                }else{
+                    const deletarQuarto = await DatabaseQuartosMetodos.deletar(req.params.id);
+                    res.status(200).json(deletarQuarto)
                 }
-                res.status(200).json(quarto)
             }catch(error){
                 res.status(404).json(error.message)
             }
