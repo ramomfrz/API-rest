@@ -3,7 +3,6 @@ import ValidacoesService from "../services/ValidacoesService.js";
 import DatabaseLimpezasMetodos from "../DAO/DatabaseLimpezasMetodos.js";
 
 DatabaseLimpezasMetodos.createTableLimpezas()
-
 class Limpezas{
     static rotas(app){       
         app.get("/limpezas", async (req, res) => {
@@ -41,15 +40,12 @@ class Limpezas{
                 }  
             }catch(error){
                 res.status(400).json(error.message)
-            }
-            
+            }            
         })
 
         app.put("/limpezas/:id", async (req, res) => {
             const ehValido = ValidacoesService.ehValido(...Object.values(req.body))
-
             try{
-
                 if(ehValido){
                     const limpeza = new LimpezaModel(...Object.values(req.body))
                     const resposta = await DatabaseLimpezasMetodos.atualizarLimpezaPorId(req.params.id, limpeza)
@@ -60,24 +56,19 @@ class Limpezas{
             }catch(error){
                 res.status(400).json(error.message)
             }
-            
         })
 
         app.delete("/limpezas/:id", async (req, res) => {
             try{
                 const limpeza = await DatabaseLimpezasMetodos.deletarLimpezaPorId(req.params.id)
-                if(limpeza){
-                    res.status(200).json(limpeza)
-                }else{
+                if(!limpeza){
                     throw new Error("Limpeza não encontrada")
                 }
-
+                res.status(200).json(limpeza)
             }catch(error){
                 res.status(404).json(error.message)
             }
-            
         })
-
     }
 }
 
