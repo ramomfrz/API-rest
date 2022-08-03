@@ -13,7 +13,7 @@ const limpeza = {
 const reserva = {
     CPF: "12345678912",
     nome: "Ramom Silva",
-    numeroQuarto: "4",
+    numeroQuarto: 4,
     dataEntrada: "01/01/22",
     dataSaida: "10/01/22"
 }
