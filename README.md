@@ -65,11 +65,9 @@ Inicie o servidor
   npm run start
 ```
 
-```
-O servidor iniciará na porta: 3000
+## 🚪 Porta:
+O servidor está como padrão para rodar na porta 3000, porém se for necessário é possivel alterar no .env.
 
-http://localhost:3000
-```
 
 ## 👣 Rotas:
 
