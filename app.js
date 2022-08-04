@@ -1,7 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import Quartos from "./src/controller/Quartos.js";
-import Limpezas from "./src/controller/limpezaController.js";
+import Limpezas from "./src/controller/LimpezaController.js";
 import Reservas from "./src/controller/Reservas.js";
 import Funcionarios from "./src/controller/funcionarios-controller.js";
 import Hospedes from "./src/controller/Hospedes.js";
