@@ -85,6 +85,9 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 * PUT: URL_DA_API / hospedes/ {CPF}
 * DELETE: URL_DA_API / hospedes/ {CPF}
 * 
+
+## Entidade Quartos
+
 ## 🕹️ Exemplos (GET)
 
 GET: URL_DA_API/quartos/
@@ -179,6 +182,94 @@ DELETE: URL_DA_API/quartos/1
 	"Mensagem": "Registro do Id 1 removido com sucesso"
 }
 ```
+## Entidade Limpeza
+
+## 🕹️ Exemplos (GET)
+
+GET: URL_DA_API/limpezas/
+
+## Resposta: 
+
+```
+[
+	{
+		"id": 1,
+    		"numeroQuarto": "447",
+    		"controle": 1,
+    		"id_funcionario": "2346",
+    		"data": "24/05/2022"
+	},
+	{
+		"id": 2,
+    		"numeroQuarto": "9767",
+    		controle: 1,
+    		id_funcionario: "6497",
+    		data: "23/05/2018"
+	}
+]
+
+```
+
+GET: URL_DA_API/limpezas/1
+
+```
+[
+	{
+		"id": 1,
+    		"numeroQuarto": "447",
+    		"controle": 1,
+    		"id_funcionario": "2346",
+    		"data": "24/05/2022"
+	}
+]
+
+```
+
+## 🕹️ Exemplo (POST)
+
+POST: URL_DA_API/limpezas/
+
+```
+{
+    	"numeroQuarto": 4687,
+    	"controle": 1,
+    	"id_funcionario": 2346,
+    	"data": "24/05/2022"
+}
+```
+
+## 🕹️ Exemplo (PUT)
+
+PUT: URL_DA_API/limpezas/1
+
+```
+{
+    	"numeroQuarto": 4687,
+    	"controle": 1,
+    	"id_funcionario": 2398,
+    	"data": "24/05/2022"
+}
+```
+## Resposta: 
+
+```
+{
+	"Mensagem": "Dados atualizados."
+}
+```
+
+## 🕹️ Exemplo (DELETE)
+
+DELETE: URL_DA_API/quartos/1
+
+## Resposta: 
+
+```
+{
+	"Mensagem": "Registro do Id 1 removido com sucesso"
+}
+```
+
 ## Autores
 
 - [Allan Barboza](https://github.com/AllanBarbozaG)
