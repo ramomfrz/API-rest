@@ -12,6 +12,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [Node.JS](https://nodejs.org/en/)
 - [Express](http://expressjs.com/pt-br/)
 - [SQLite](https://www.sqlite.org/index.html)
+- [Insomnia](https://insomnia.rest/download)
 
 ## ♟️ Dependências:
 
@@ -64,10 +65,15 @@ Inicie o servidor
   npm run start
 ```
 
+```
+O servidor iniciará na porta: 3000
+
+http://localhost:3000
+```
 
 ## 👣 Rotas:
 
-O projeto possui 5 entidades são elas QUARTOS, RESERVAS, FUNCIONÁRIOS, HOSPEDES e LIMPEZA. Cada entidade possui 5 rotas que são:
+O projeto utiliza os verbos HTTP (GET, POST, PUT, DELETE) nas 5 entidades criadas para esta API.Elas estão dividdidas em: QUARTOS, RESERVAS, FUNCIONÁRIOS, HOSPEDES e LIMPEZA. Cada entidade possui 5 rotas que são:
 
 * GET: URL_DA_API / *"nome da entidade"*  
 * GET: URL_DA_API / *"nome da entidade"/* {id} 
@@ -80,6 +86,7 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 * GET: URL_DA_API / hospedes/ {CPF}
 * PUT: URL_DA_API / hospedes/ {CPF}
 * DELETE: URL_DA_API / hospedes/ {CPF}
+* 
 ## 🕹️ Exemplos (GET)
 
 GET: URL_DA_API/quartos/
@@ -176,8 +183,8 @@ DELETE: URL_DA_API/quartos/1
 ```
 ## Autores
 
-- [@AllanBarbozaG](https://github.com/AllanBarbozaG)
-- [@carolinadesouzasilva](https://github.com/carolinadesouzasilva)
-- [@letxns](https://github.com/letxns)
-- [@ramomfrz](https://github.com/ramomfrz)
-- [@RaaphaelGomesS](https://github.com/RaaphaelGomesS)
+- [Allan Barboza](https://github.com/AllanBarbozaG)
+- [Carolina Souza](https://github.com/carolinadesouzasilva)
+- [Letícia Martins](https://github.com/letxns)
+- [Ramom Ferraz](https://github.com/ramomfrz)
+- [Raphael Gomes](https://github.com/RaaphaelGomesS)
