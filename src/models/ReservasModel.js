@@ -1,4 +1,4 @@
-// O numero do quarto deve ser passado como number. Sem a necessidade de string. //
+// O numero do quarto deve ser passado como number. Sem a necessidade de string. "" //
 
 class ModelReservas {
     constructor(CPF, nome, numeroQuarto, dataEntrada, dataSaida) {
