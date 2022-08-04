@@ -71,7 +71,7 @@ O servidor está como padrão para rodar na porta 3000, porém se for necessári
 
 ## 👣 Rotas:
 
-O projeto utiliza os verbos HTTP (GET, POST, PUT, DELETE) nas 5 entidades criadas para esta API.Elas estão dividdidas em: QUARTOS, RESERVAS, FUNCIONÁRIOS, HOSPEDES e LIMPEZA. Cada entidade possui 5 rotas que são:
+O projeto utiliza os verbos HTTP (GET, POST, PUT, DELETE) nas 5 entidades criadas para esta API. Elas estão dividdidas em: QUARTOS, RESERVAS, FUNCIONÁRIOS, HOSPEDES e LIMPEZA. Cada entidade possui 5 rotas que são:
 
 * GET: URL_DA_API / *"nome da entidade"*  
 * GET: URL_DA_API / *"nome da entidade"/* {id} 
