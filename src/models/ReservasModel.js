@@ -1,9 +1,12 @@
+// O numero do quarto deve ser passado como number. Sem a necessidade de string. "" //
+
 class ModelReservas {
-    constructor(CpfCliente, NumeroQuarto, DataEntrada, DataSaida) {
-        this.CpfCliente = CpfCliente
-        this.NumeroQuarto = NumeroQuarto
-        this.DataEntrada = DataEntrada
-        this.DataSaida = DataSaida
+    constructor(CPF, nome, numeroQuarto, dataEntrada, dataSaida) {
+        this.CPF = CPF
+        this.nome = nome
+        this.numeroQuarto = numeroQuarto
+        this.dataEntrada = dataEntrada
+        this.dataSaida = dataSaida
     }
 }
 
