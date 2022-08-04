@@ -244,6 +244,7 @@ PUT: URL_DA_API/limpezas/1
 
 ```
 {
+	"id": 1,
     	"numeroQuarto": 4687,
     	"controle": 1,
     	"id_funcionario": 2398,
@@ -260,7 +261,7 @@ PUT: URL_DA_API/limpezas/1
 
 ## 🕹️ Exemplo (DELETE)
 
-DELETE: URL_DA_API/quartos/1
+DELETE: URL_DA_API/limpezas/1
 
 ## Resposta: 
 
