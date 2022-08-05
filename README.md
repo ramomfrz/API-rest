@@ -1,5 +1,6 @@
 
-# PROJETO DO MÓDULO 4 🦖
+
+# PROJETO DO MÓDULO 4 API REST HOTEL🦖
 
 Projeto do curso de desenvolvimento web full stack da Resília que consiste em criar uma API Rest utilizando CRUD e a estrutura de organização MVC. Tem como finalidade armazenar e gerenciar informações de um hotel.  
 
@@ -85,14 +86,11 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 * PUT: URL_DA_API / hospedes/ {CPF}
 * DELETE: URL_DA_API / hospedes/ {CPF}
 * 
-
-## Entidade Quartos
-
 ## 🕹️ Exemplos (GET)
 
-GET: URL_DA_API/quartos/
+## GET: URL_DA_API/quartos/
 
-## Resposta: 
+### Resposta: 
 
 ```
 [
@@ -114,7 +112,7 @@ GET: URL_DA_API/quartos/
 
 ```
 
-GET: URL_DA_API/quartos/1
+## GET: URL_DA_API/quartos/1
 
 ```
 [
@@ -129,9 +127,76 @@ GET: URL_DA_API/quartos/1
 
 ```
 
+## GET: URL_DA_API/funionario/
+
+### Resposta:
+
+```
+[
+	{
+		"id": 1,
+		"nome": "Mariana Silva",
+		"data_admissao": "15/05/2022"
+	},
+	{
+		"id": 2,
+		"nome": "João Silva",
+		"data_admissao": "20/05/2022"
+	},
+	{
+		"id": 3,
+		"nome": "Jane Doe",
+		"data_admissao": "25/05/2022"
+	}
+]
+```
+## GET: URL_DA_API/funionario/3
+
+```
+{
+	"id": 3,
+	"nome": "Jane Doe",
+	"data_admissao": "25/05/2022"
+}
+```
+## GET: URL_DA_API/hospedes/
+```
+[
+	{
+		"cpf": "12345678912",
+		"nome": "José Silva",
+		"numeroQuarto": "4",
+		"telefone": "199874671"
+	},
+	{
+		"cpf": "12345678913",
+		"nome": "João Pedro",
+		"numeroQuarto": "6",
+		"telefone": "199874622"
+	},
+	{
+		"cpf": "12345678928",
+		"nome": "Joana Almeida",
+		"numeroQuarto": "5",
+		"telefone": "199874627"
+	}
+]
+```
+
+## GET: URL_DA_API/hospedes/12345678928
+### Resposta: 
+```
+{
+	"cpf": "12345678928",
+	"nome": "Joana Almeida",
+	"numeroQuarto": "5",
+	"telefone": "199874627"
+}
+```
+
 ## 🕹️ Exemplo (POST)
 
-POST: URL_DA_API/quartos/
+## POST: URL_DA_API/quartos/
 
 ```
 {
@@ -142,7 +207,7 @@ POST: URL_DA_API/quartos/
 }
 ```
 
-## Resposta: 
+### Resposta: 
 
 ``` 
 {
@@ -151,9 +216,41 @@ POST: URL_DA_API/quartos/
 
 ```
 
+## POST URL_DA_API/funcionario/
+
+```
+{
+	"nome": "Mariana Silva",
+	"data_admissao": "15/05/2022"
+}
+```
+### Resposta:
+```
+{
+	"Mensagem": "Registro incluído no sistema com sucesso!"
+}
+```
+
+## POST: URL_DA_API/hospedes/
+```
+{
+    "cpf": "12345678912",
+    "nome": "José Silva",
+    "numeroQuarto": 4,
+    "telefone": "199874671"
+}
+```
+### Resposta:
+```
+{
+	"Mensagem": "Registro incluído no sistema com sucesso!"
+}
+```
+## POST: URL_DA_API/reservas/
+
 ## 🕹️ Exemplo (PUT)
 
-PUT: URL_DA_API/quartos/1
+## PUT: URL_DA_API/quartos/1
 
 ```
 {
@@ -163,7 +260,7 @@ PUT: URL_DA_API/quartos/1
 	"telefone": "664317425"
 }
 ```
-## Resposta: 
+### Resposta: 
 
 ```
 {
@@ -171,103 +268,65 @@ PUT: URL_DA_API/quartos/1
 }
 ```
 
-## 🕹️ Exemplo (DELETE)
-
-DELETE: URL_DA_API/quartos/1
-
-## Resposta: 
+## PUT: URL_DA_API/funcionario/2
 
 ```
 {
-	"Mensagem": "Registro do Id 1 removido com sucesso"
+	"nome": "João da Silva",
+	"data_admissao": "25/05/2022"
 }
 ```
-## Entidade Limpeza
-
-## 🕹️ Exemplos (GET)
-
-GET: URL_DA_API/limpezas/
-
-## Resposta: 
-
-```
-[
-	{
-		"id": 1,
-    		"numeroQuarto": "447",
-    		"controle": 1,
-    		"id_funcionario": "2346",
-    		"data": "24/05/2022"
-	},
-	{
-		"id": 2,
-    		"numeroQuarto": "9767",
-    		controle: 1,
-    		id_funcionario: "6497",
-    		data: "23/05/2018"
-	}
-]
-
-```
-
-GET: URL_DA_API/limpezas/1
-
-```
-[
-	{
-		"id": 1,
-    		"numeroQuarto": "447",
-    		"controle": 1,
-    		"id_funcionario": "2346",
-    		"data": "24/05/2022"
-	}
-]
-
-```
-
-## 🕹️ Exemplo (POST)
-
-POST: URL_DA_API/limpezas/
-
-```
-{
-    	"numeroQuarto": 4687,
-    	"controle": 1,
-    	"id_funcionario": 2346,
-    	"data": "24/05/2022"
-}
-```
-
-## 🕹️ Exemplo (PUT)
-
-PUT: URL_DA_API/limpezas/1
-
-```
-{
-	"id": 1,
-    	"numeroQuarto": 4687,
-    	"controle": 1,
-    	"id_funcionario": 2398,
-    	"data": "24/05/2022"
-}
-```
-## Resposta: 
-
+### Resposta:
 ```
 {
 	"Mensagem": "Dados atualizados."
 }
 ```
+## PUT: URL_DA_API/hospedes/12345678928
+```
+{
+    "cpf": "12345678928",
+    "nome": "Joana Almeida",
+    "numeroQuarto": 8,
+    "telefone": "199874627"
+}
+```
+### Resposta:
+```
+{
+	"error": false,
+	"message": "Hospede cpf 12345678928 atualizado com sucesso."
+}
+```
 
 ## 🕹️ Exemplo (DELETE)
 
-DELETE: URL_DA_API/limpezas/1
+## DELETE: URL_DA_API/quartos/1
 
-## Resposta: 
+### Resposta: 
 
 ```
 {
 	"Mensagem": "Registro do Id 1 removido com sucesso"
+}
+```
+
+## DELETE: URL_DA_API/funcionario/1
+
+### Resposta:
+```
+{
+	"Mensagem": "Registro do Id 1 removido com sucesso"
+}
+```
+
+## DELETE: URL_DA_API/hospedes/12345678913
+
+### Resposta:
+```
+{
+	"erro": false,
+	"message": "Registro com cpf 12345678913 apagado com sucesso!"
 }
 ```
 
