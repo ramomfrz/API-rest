@@ -8,6 +8,8 @@ export default class ValidacoesService {
         }        
     }
 
+    // O numero do quarto deve ser passado como number. Sem a necessidade de string. //
+    
     static validaNumeroQuarto(numeroQuarto) {
         if (numeroQuarto >= 1 && numeroQuarto <= 9999) {
             if (typeof (numeroQuarto) != "number") {

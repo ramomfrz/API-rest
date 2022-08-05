@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "Allan, Carol, Leticia, Ramom, Raphael",
   "license": "MIT",
-  "dependencies": {    
+  "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "path": "^0.12.7",

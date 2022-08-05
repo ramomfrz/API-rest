@@ -40,30 +40,34 @@ class Funcionarios{
             }
         })
 
-        app.put('/funcionario/:id', async (req, res) => {
-            try{  
-                const validarFuncionario = ValidacoesService.validarFuncionario(...Object.values(req.body))
-
-                if(validarFuncionario){
-                    const funcionario = new FuncionarioModel(...Object.values(req.body))
-                    const responde = await DatabaseFuncionariosMetodos.updateFuncionarios(req.params.id, funcionario)
-                    res.status(200).json(responde)
-                }else {
-                    throw new Error("Inválido")
-
+        app.put('/funcionario/:id', async (req, res) => { 
+            const validarFuncionario = ValidacoesService.validarFuncionario(...Object.values(req.body))
+            const encontrarFuncionario = await DatabaseFuncionariosMetodos.listFuncionariosById(req.params.id)
+            try{
+            if(validarFuncionario){
+                if(!encontrarFuncionario){
+                    throw new Error("Não foi encontrado um funcionario com esse ID")
                 }
-            }catch(error){
-                res.status(400).json(error.message)
+                const funcionario = new FuncionarioModel(...Object.values(req.body))
+                const responde = await DatabaseFuncionariosMetodos.updateFuncionarios(req.params.id, funcionario)
+                res.status(200).json(responde)
+            }else {
+                throw new Error("Falha ao atualizar o funcionario, confira os dados.")
             }
-        })
+        }catch(error){
+            res.status(400).json(error.message)
+        }
+    })
 
         app.delete('/funcionario/:id', async (req, res) => {
             try{
-                const funcionario = await DatabaseFuncionariosMetodos.deleteFuncionario(req.params.id)
-                if(!funcionario){
+                const encontrarFuncionario = await DatabaseFuncionariosMetodos.listFuncionariosById(req.params.id)
+                if(!encontrarFuncionario){
                     throw new Error("Funcionário não encontrado no sistema")
+                }else{
+                    const funcionario = await DatabaseFuncionariosMetodos.deleteFuncionario(req.params.id)
+                    res.status(200).json(funcionario)
                 }
-                res.status(200).json(funcionario)
             }catch(error){
                 res.status(404).json(error.message)
             }
