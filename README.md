@@ -288,7 +288,7 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 ## POST: URL_DA_API/reservas/
 ```
 {
-	  "CPF":"12345678912",
+    "CPF":"12345678912",
     "nome": "Ramom Silva",
     "numeroQuarto": 4,
     "dataEntrada": "01/01/22",
