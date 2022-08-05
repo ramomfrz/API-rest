@@ -1,7 +1,11 @@
 export default class ValidacoesService {
 
     static validaNome(nome) {
-        return nome.length >= 2
+        if (nome == null) {
+            return false
+        } else {
+            return nome.length >= 2
+        }        
     }
 
     // O numero do quarto deve ser passado como number. Sem a necessidade de string. //
@@ -58,12 +62,14 @@ export default class ValidacoesService {
     }
 
     static validaTelefone(telefone) {
-        if(telefone.length <= 9){
-        const telefoneValidado = parseInt(telefone)
-        return telefoneValidado == telefone
-        }else{
+        if (telefone == null) {
             return false
-        }
+        } else if (telefone.length <= 9) {
+            const telefoneValidado = parseInt(telefone)
+            return telefoneValidado == telefone
+        } else {
+            return false
+        }      
     }
 
     static validarFuncionario(nome, dataEntrada) {
