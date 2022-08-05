@@ -193,7 +193,46 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 	"telefone": "199874627"
 }
 ```
-
+## GET: URL_DA_API/reservas/
+```
+[
+	{
+		"id": 1,
+		"CPF": "12345678912",
+		"nome": "Ramom Silva",
+		"numeroQuarto": "4",
+		"dataEntrada": "01/01/22",
+		"dataSaida": "10/01/22"
+	},
+	{
+		"id": 2,
+		"CPF": "12345678918",
+		"nome": "Rita Silva",
+		"numeroQuarto": "8",
+		"dataEntrada": "01/01/22",
+		"dataSaida": "10/01/22"
+	},
+	{
+		"id": 3,
+		"CPF": "12345678928",
+		"nome": "Teresa Silva",
+		"numeroQuarto": "10",
+		"dataEntrada": "01/01/22",
+		"dataSaida": "10/01/22"
+	}
+]
+```
+## GET: URL_DA_API/reservas/1
+```
+{
+	"id": 1,
+	"CPF": "12345678912",
+	"nome": "Ramom Silva",
+	"numeroQuarto": "4",
+	"dataEntrada": "01/01/22",
+	"dataSaida": "10/01/22"
+}
+```
 ## 🕹️ Exemplo (POST)
 
 ## POST: URL_DA_API/quartos/
@@ -247,6 +286,22 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 }
 ```
 ## POST: URL_DA_API/reservas/
+```
+{
+	  "CPF":"12345678912",
+    "nome": "Ramom Silva",
+    "numeroQuarto": 4,
+    "dataEntrada": "01/01/22",
+    "dataSaida": "10/01/22"
+}
+```
+### Resposta:
+```
+{
+	"Mensagem": "Registro incluído no sistema com sucesso!"
+}
+```
+
 
 ## 🕹️ Exemplo (PUT)
 
@@ -298,6 +353,24 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 	"message": "Hospede cpf 12345678928 atualizado com sucesso."
 }
 ```
+## PUT: URL_DA_API/reservas/1
+```
+{
+	"CPF": "12345678912",
+	"nome": "Ramom Silva",
+	"numeroQuarto": 4,
+	"dataEntrada": "01/01/22",
+	"dataSaida": "12/01/22"
+}
+```
+### Resposta:
+
+```
+{
+	"Mensagem": "Os dados da reserva foram atualizados."
+}
+
+```
 
 ## 🕹️ Exemplo (DELETE)
 
@@ -327,6 +400,14 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 {
 	"erro": false,
 	"message": "Registro com cpf 12345678913 apagado com sucesso!"
+}
+```
+## DELETE: URL_DA_API/hospedes/1
+
+### Resposta:
+```
+{
+	"Mensagem": "Registro de reserva deletado."
 }
 ```
 
