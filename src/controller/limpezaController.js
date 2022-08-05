@@ -59,12 +59,15 @@ class Limpezas{
         })
 
         app.delete("/limpezas/:id", async (req, res) => {
+            //listar por id, se conseguir, deletar
             try{
-                const limpeza = await DatabaseLimpezasMetodos.deletarLimpezaPorId(req.params.id)
-                if(!limpeza){
+                const procuraLimpeza = await DatabaseLimpezasMetodos.listarLimpezaPorId(req.params.id)
+                if(!procuraLimpeza){
                     throw new Error("Limpeza não encontrada")
+                } else{
+                    const deletaLimpeza = await DatabaseLimpezasMetodos.deletarLimpezaPorId(req.params.id)
+                    res.status(200).json(deletaLimpeza)
                 }
-                res.status(200).json(limpeza)
             }catch(error){
                 res.status(404).json(error.message)
             }
