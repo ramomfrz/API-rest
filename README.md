@@ -127,7 +127,7 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 
 ```
 
-## GET: URL_DA_API/funionario/
+## GET: URL_DA_API/funcionario/
 
 ### Resposta:
 
@@ -150,7 +150,7 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 	}
 ]
 ```
-## GET: URL_DA_API/funionario/3
+## GET: URL_DA_API/funcionario/3
 
 ```
 {
