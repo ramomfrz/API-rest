@@ -1,8 +1,16 @@
+<div align='center'>
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" />
+    <img src="https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white" />
+</div>
+
+# PROJETO DO MÓDULO 4 🦖
+
+### Projeto do curso de desenvolvimento web full stack da Resília que consiste em criar uma API Rest utilizando CRUD e a estrutura de organização MVC. Tem como finalidade armazenar e gerenciar informações de um hotel.  
 
 
-# PROJETO DO MÓDULO 4 API REST HOTEL🦖
-
-Projeto do curso de desenvolvimento web full stack da Resília que consiste em criar uma API Rest utilizando CRUD e a estrutura de organização MVC. Tem como finalidade armazenar e gerenciar informações de um hotel.  
 
 
 ## 🚀 Tecnologias utilizadas
@@ -72,7 +80,7 @@ O servidor está como padrão para rodar na porta 3000, porém se for necessári
 
 ## 👣 Rotas:
 
-O projeto utiliza os verbos HTTP (GET, POST, PUT, DELETE) nas 5 entidades criadas para esta API. Elas estão dividdidas em: QUARTOS, RESERVAS, FUNCIONÁRIOS, HOSPEDES e LIMPEZA. Cada entidade possui 5 rotas que são:
+O projeto utiliza os verbos HTTP (GET, POST, PUT, DELETE) nas 5 entidades criadas para esta API. Elas estão divididas em: QUARTOS, RESERVAS, FUNCIONÁRIOS, HOSPEDES e LIMPEZA. Cada entidade possui 5 rotas que são:
 
 * GET: URL_DA_API / *"nome da entidade"*  
 * GET: URL_DA_API / *"nome da entidade"/* {id} 
@@ -85,8 +93,10 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 * GET: URL_DA_API / hospedes/ {CPF}
 * PUT: URL_DA_API / hospedes/ {CPF}
 * DELETE: URL_DA_API / hospedes/ {CPF}
-* 
-## 🕹️ Exemplos (GET)
+
+## 🕹️ Retornando as Entidades (GET)
+
+É possível retornar tanto todos os registros de uma entidade quanto registros específicos de cada uma. Na entidade hospedes, para retornar um registro específico, utiliza-se o cpf, nas demais entidades o id.
 
 ## GET: URL_DA_API/quartos/
 
@@ -114,6 +124,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 
 ## GET: URL_DA_API/quartos/1
 
+### Resposta:
+
 ```
 [
 	{
@@ -127,7 +139,7 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 
 ```
 
-## GET: URL_DA_API/funcionario/
+## GET: URL_DA_API/funionario/
 
 ### Resposta:
 
@@ -142,15 +154,12 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 		"id": 2,
 		"nome": "João Silva",
 		"data_admissao": "20/05/2022"
-	},
-	{
-		"id": 3,
-		"nome": "Jane Doe",
-		"data_admissao": "25/05/2022"
 	}
 ]
 ```
-## GET: URL_DA_API/funcionario/3
+## GET: URL_DA_API/funionario/3
+
+### Resposta:
 
 ```
 {
@@ -159,7 +168,10 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 	"data_admissao": "25/05/2022"
 }
 ```
+
 ## GET: URL_DA_API/hospedes/
+
+### Resposta:
 ```
 [
 	{
@@ -173,17 +185,12 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 		"nome": "João Pedro",
 		"numeroQuarto": "6",
 		"telefone": "199874622"
-	},
-	{
-		"cpf": "12345678928",
-		"nome": "Joana Almeida",
-		"numeroQuarto": "5",
-		"telefone": "199874627"
 	}
 ]
 ```
 
 ## GET: URL_DA_API/hospedes/12345678928
+
 ### Resposta: 
 ```
 {
@@ -194,6 +201,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 }
 ```
 ## GET: URL_DA_API/reservas/
+
+### Resposta:
 ```
 [
 	{
@@ -211,18 +220,12 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 		"numeroQuarto": "8",
 		"dataEntrada": "01/01/22",
 		"dataSaida": "10/01/22"
-	},
-	{
-		"id": 3,
-		"CPF": "12345678928",
-		"nome": "Teresa Silva",
-		"numeroQuarto": "10",
-		"dataEntrada": "01/01/22",
-		"dataSaida": "10/01/22"
 	}
 ]
 ```
 ## GET: URL_DA_API/reservas/1
+
+### Resposta:
 ```
 {
 	"id": 1,
@@ -233,13 +236,59 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 	"dataSaida": "10/01/22"
 }
 ```
-## 🕹️ Exemplo (POST)
+
+## GET: URL_DA_API/limpezas/
+
+### Resposta:
+```
+[
+	{
+		"id": 1,
+		"numeroQuarto": "3008",
+		"controle": 1,
+		"id_funcionario": "2",
+		"dataEntrada": "04/08/22"
+	},
+	{
+		"id": 3,
+		"numeroQuarto": "3000",
+		"controle": 1,
+		"id_funcionario": "1",
+		"dataEntrada": "04/08/22"
+	}
+]
+```
+
+## GET: URL_DA_API/limpezas/1
+
+### Resposta:
+```
+{
+	"id": 1,
+	"numeroQuarto": "3008",
+	"controle": 1,
+	"id_funcionario": "2",
+	"dataEntrada": "04/08/22"
+}
+
+```
+## 🕹️ Exemplos de inserção dados (POST)
+
+:heavy_exclamation_mark: É importante que os atributos do POST sejam do tipo certo: 
+
+* controle, numeroQuarton id_funcionario --> Number
+* nomeHospede, data_admissao, dataEntrada, dataSaida --> String
+* telefone --> String, no máximo 9 dígitos
+* cpf --> String, exatamente 11 dígitos
 
 ## POST: URL_DA_API/quartos/
 
+### Requisição (JSON)
+
+
 ```
 {
-	"numeroQuarto": 115,
+	"numeroQuarto": 115, 
 	"nomeHospede": "Exemplo",
 	"controle": 1,
 	"telefone": "664317425"
@@ -257,6 +306,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 
 ## POST URL_DA_API/funcionario/
 
+### Requisição (JSON)
+
 ```
 {
 	"nome": "Mariana Silva",
@@ -271,6 +322,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 ```
 
 ## POST: URL_DA_API/hospedes/
+
+### Requisição (JSON)
 ```
 {
     "cpf": "12345678912",
@@ -286,6 +339,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 }
 ```
 ## POST: URL_DA_API/reservas/
+
+### Requisição (JSON)
 ```
 {
     "CPF":"12345678912",
@@ -302,10 +357,37 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 }
 ```
 
+## POST: URL_DA_API/limpezas/
 
-## 🕹️ Exemplo (PUT)
+### Requisição (JSON)
+```
+{	 
+    "numeroQuarto": 447,
+    "controle": 1,
+    "id_funcionario": 236,
+    "data": "24/05/2022"
+}
+```
+### Resposta:
+```
+{
+	"Mensagem": "Registro incluído no sistema com sucesso!"
+}
+```
+
+
+## 🕹️ Exemplos de atualização de dados (PUT)
+
+:heavy_exclamation_mark: É importante que os atributos do POST sejam do tipo certo: 
+
+* controle, numeroQuarto, id_funcionario --> Number
+* nomeHospede, data_admissao, dataEntrada, dataSaida --> String
+* telefone --> String, no máximo 9 dígitos
+* cpf --> String, exatamente 11 dígitos
 
 ## PUT: URL_DA_API/quartos/1
+
+### Requisição (JSON)
 
 ```
 {
@@ -325,6 +407,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 
 ## PUT: URL_DA_API/funcionario/2
 
+### Requisição (JSON)
+
 ```
 {
 	"nome": "João da Silva",
@@ -338,6 +422,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 }
 ```
 ## PUT: URL_DA_API/hospedes/12345678928
+
+### Requisição (JSON)
 ```
 {
     "cpf": "12345678928",
@@ -354,6 +440,8 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 }
 ```
 ## PUT: URL_DA_API/reservas/1
+
+### Requisição (JSON)
 ```
 {
 	"CPF": "12345678912",
@@ -372,7 +460,27 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 
 ```
 
-## 🕹️ Exemplo (DELETE)
+## PUT: URL_DA_API/limpezas/1
+
+### Requisição (JSON)
+```
+{
+	"numeroQuarto": 200,
+	"controle": 1,
+	"id_funcionario": 2,
+	"dataEntrada": "04/08/22"
+}
+```
+### Resposta:
+
+```
+{
+	"Mensagem": "Dados atualizados."
+}
+
+```
+
+## 🕹️ Exemplos de deleção de dados (DELETE)
 
 ## DELETE: URL_DA_API/quartos/1
 
@@ -402,12 +510,21 @@ A entidade HOSPEDES utiliza o cpf no lugar do id:
 	"message": "Registro com cpf 12345678913 apagado com sucesso!"
 }
 ```
-## DELETE: URL_DA_API/hospedes/1
+## DELETE: URL_DA_API/reservas/1
 
 ### Resposta:
 ```
 {
 	"Mensagem": "Registro de reserva deletado."
+}
+```
+
+## DELETE: URL_DA_API/limpezas/1
+
+### Resposta:
+```
+{
+	"Mensagem": "Registro do Id 1 removido com sucesso"
 }
 ```
 
