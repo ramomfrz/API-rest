@@ -5,6 +5,8 @@ import Limpezas from "./src/controller/limpezaController.js";
 import Reservas from "./src/controller/Reservas.js";
 import Funcionarios from "./src/controller/funcionarios-controller.js";
 import Hospedes from "./src/controller/Hospedes.js";
+import res from "express/lib/response.js";
+const cors = require("cors")
 
 dotenv.config();
 
@@ -17,6 +19,9 @@ app.listen(port, () => {
 })
 
 app.use(express.json());
+res.header("Acess-Control-Allow-Origin", "*");
+res.header("Acess-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+app.use(cors());
 
 Quartos.rotas(app);
 Limpezas.rotas(app);
