@@ -28,7 +28,7 @@ class Quartos{
         app.post("/quartos", async (req, res) => {
             const validaGeral =  ValidacoesService.validaGeral(...Object.values(req.body));
             try{
-                if(validaGeral){
+                if(!validaGeral){
                     const quarto = new QuartosModel(...Object.values(req.body));
                     const response = await DatabaseQuartosMetodos.insere(quarto);
                     res.status(201).json(response)
@@ -44,7 +44,7 @@ class Quartos{
             const validaGeral =  ValidacoesService.validaGeral(...Object.values(req.body));
             const encontraQuarto = await DatabaseQuartosMetodos.listarUm(req.params.id);
             try{
-                if (validaGeral) {
+                if (!validaGeral) {
                     if (!encontraQuarto) {
                     throw new Error("Não foi encontrado um quarto com esse ID")
                 }
